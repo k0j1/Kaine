@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://k0j1.github.io/Kaine",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
