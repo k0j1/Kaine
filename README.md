@@ -20,6 +20,12 @@ npm run dev
 ```
 ターミナルに表示されるURL（例: `http://localhost:5173`）を開いてください。
 
+## 画像ファイルの配置について
+駐車場の画像などは `public/image/` フォルダに配置してください。
+例: `public/image/Parking.png`
+
+Viteでは `public` フォルダ内のファイルがビルド後のルートディレクトリに配置されます。
+
 ## GitHub Pagesへの公開方法
 
 このプロジェクトは **GitHub Actions** を使用して自動的に公開されるように設定されています。
