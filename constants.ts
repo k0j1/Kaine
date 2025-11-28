@@ -16,7 +16,7 @@ export const MENU_SCANS = [
   { src: "https://placehold.co/600x850/f5f5f0/1a1a1a?text=Drink+Menu+Scan", alt: "ドリンクメニュー" }
 ];
 
-export const PARKING_IMAGE_URL = "駐車場.png";
+export const PARKING_IMAGE_URL = "./image/Parking.png";
 
 export const MENU_DATA: MenuSectionData[] = [
   {
