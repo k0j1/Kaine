@@ -19,8 +19,7 @@ export const MENU_SCANS = [
 // GitHub Pages等のサブディレクトリ展開に対応するため、BASE_URLを使用
 // 安全にアクセスするためにオプショナルチェーンを使用し、未定義の場合は '/' をフォールバックとする
 // @ts-ignore
-const baseUrl = import.meta.env?.BASE_URL ?? '/';
-export const PARKING_IMAGE_URL = `${baseUrl}image/Parking.png`;
+export const PARKING_IMAGE_URL = `./image/Parking.png`;
 
 export const MENU_DATA: MenuSectionData[] = [
   {
