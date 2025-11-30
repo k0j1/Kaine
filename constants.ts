@@ -16,10 +16,8 @@ export const MENU_SCANS = [
   { src: "https://placehold.co/600x850/f5f5f0/1a1a1a?text=Drink+Menu+Scan", alt: "ドリンクメニュー" }
 ];
 
-// GitHub Pages等のサブディレクトリ展開に対応するため、BASE_URLを使用
-// 安全にアクセスするためにオプショナルチェーンを使用し、未定義の場合は '/' をフォールバックとする
-// @ts-ignore
-export const PARKING_IMAGE_URL = `./image/Parking.png`;
+// Google Driveの画像を直接表示するためのURL
+export const PARKING_IMAGE_URL = "https://drive.google.com/uc?export=view&id=1u0MrL7ZpTTTwqMaFCG349yWCSBzlGUKa";
 
 export const MENU_DATA: MenuSectionData[] = [
   {

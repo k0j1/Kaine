@@ -1,12 +1,23 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { GALLERY_IMAGES } from '../constants';
 
-const Gallery: React.FC = () => {
+interface GalleryProps {
+  apiImages?: string[];
+}
+
+const Gallery: React.FC<GalleryProps> = ({ apiImages }) => {
   const [rotation, setRotation] = useState(0);
   const autoRotateRef = useRef<number>(0);
   const isHoveringRef = useRef(false);
 
-  const numberOfImages = GALLERY_IMAGES.length;
+  // API画像がある場合はそれを使い、なければ定数の画像を使う
+  const displayImages = (apiImages && apiImages.length > 0) 
+    ? apiImages.map((src, index) => ({ id: `api-${index}`, src, alt: 'Kaine Cuisine & Interior' }))
+    : GALLERY_IMAGES;
+
+  // 画像枚数に合わせて角度を調整
+  const numberOfImages = displayImages.length;
   const anglePerImage = 360 / numberOfImages;
   const radius = 300; // Distance from center
 
@@ -42,7 +53,7 @@ const Gallery: React.FC = () => {
             className="relative w-[300px] h-[200px] preserve-3d transition-transform duration-100"
             style={{ transform: `rotateY(${rotation}deg)` }}
           >
-            {GALLERY_IMAGES.map((img, index) => {
+            {displayImages.map((img, index) => {
               const angle = index * anglePerImage;
               return (
                 <div

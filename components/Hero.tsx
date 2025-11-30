@@ -1,15 +1,23 @@
+
 import React from 'react';
 import { SITE_SUBTITLE } from '../constants';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  heroImage?: string;
+}
+
+const Hero: React.FC<HeroProps> = ({ heroImage }) => {
+  // デフォルト画像
+  const bgImage = heroImage || "https://picsum.photos/1920/1080?grayscale&blur=1";
+
   return (
     <div id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://picsum.photos/1920/1080?grayscale&blur=1" 
+          src={bgImage} 
           alt="Kaine Cuisine Interior" 
-          className="w-full h-full object-cover opacity-90"
+          className="w-full h-full object-cover opacity-90 transition-opacity duration-1000"
         />
         <div className="absolute inset-0 bg-stone-900/40"></div>
       </div>

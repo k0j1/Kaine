@@ -1,3 +1,4 @@
+
 # 割烹食堂かいね (Kappo Shokudo Kaine) Website
 
 福島県郡山市菜根にある「割烹食堂かいね」の公式ウェブサイトプロジェクトです。
@@ -12,7 +13,19 @@ React, TypeScript, Tailwind CSS, Vite を使用して構築されています。
 npm install
 ```
 
-### 2. 開発サーバーの起動（プレビュー）
+### 2. 環境変数の設定 (Google Maps API / Gemini API)
+`.env` ファイルをプロジェクトルートに作成し、以下のAPIキーを設定してください。
+
+```env
+# Google AI Studio (AIコンシェルジュ用)
+VITE_API_KEY=your_gemini_api_key_here
+
+# Google Cloud Platform (店舗写真取得用)
+# 有効化が必要なAPI: Maps JavaScript API, Places API
+VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
+
+### 3. 開発サーバーの起動（プレビュー）
 手元のブラウザで確認するには以下のコマンドを実行します。
 
 ```bash
@@ -47,17 +60,22 @@ Viteでは `public` フォルダ内のファイルがビルド後のルートデ
    GitHubのリポジトリページの「Actions」タブで進行状況を確認できます。
    完了すると、「Settings」>「Pages」に記載されているURLでサイトが見られるようになります。
 
+## トラブルシューティング
+
+### Google Maps API エラー: ApiNotActivatedMapError
+ブラウザのコンソールに `ApiNotActivatedMapError` が表示される場合、APIキーに紐づくGoogle Cloudプロジェクトで **「Maps JavaScript API」** が有効になっていません。
+
+**解決手順:**
+1. [Google Cloud Console](https://console.cloud.google.com/) にアクセスします。
+2. 左上のメニューから対象のプロジェクトを選択します。
+3. 「APIとサービス」 > 「ライブラリ」を選択します。
+4. 検索バーで **「Maps JavaScript API」** を検索し、「有効にする」をクリックします。
+5. 同様に **「Places API (New)」** または **「Places API」** も検索して有効にしてください。
+
 ## 構成技術
 - **Framework:** React + Vite
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **Icons:** Lucide React
 - **AI:** Google Gemini API (AIコンシェルジュ機能)
-
-## AIコンシェルジュ機能について
-AIコンシェルジュ（チャットボット）を動作させるには、有効な Gemini API Key が必要です。
-`.env` ファイルを作成し、以下のように設定してください（ローカル開発時）。
-
-```
-VITE_API_KEY=your_api_key_here
-```
+- **Map:** Google Maps Places API (店舗写真取得)
