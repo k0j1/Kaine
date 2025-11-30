@@ -1,8 +1,13 @@
+
 import React, { useState } from 'react';
 import { MENU_DATA, MENU_SCANS } from '../constants';
 import { MenuCategory, MenuSectionData } from '../types';
 
-const MenuSection: React.FC = () => {
+interface MenuSectionProps {
+  images?: string[];
+}
+
+const MenuSection: React.FC<MenuSectionProps> = ({ images }) => {
   const [activeCategory, setActiveCategory] = useState<MenuCategory>(MenuCategory.LUNCH);
 
   const activeData: MenuSectionData | undefined = MENU_DATA.find(d => d.category === activeCategory);
@@ -78,20 +83,25 @@ const MenuSection: React.FC = () => {
         <div className="mt-24 pt-12 border-t border-gray-100">
             <h3 className="text-center font-serif text-xl mb-8 text-gray-600">メニュー写真</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {MENU_SCANS.map((img, idx) => (
-                 <div key={idx} className="bg-white p-2 shadow-lg rounded-sm border border-stone-200 group cursor-pointer">
-                    <div className="aspect-[3/4] relative overflow-hidden bg-stone-100">
-                       <img 
-                         src={img.src} 
-                         alt={img.alt} 
-                         className="w-full h-full object-contain md:object-cover transition-transform duration-500 group-hover:scale-105"
-                       />
-                       <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity">
-                          {img.alt}
-                       </div>
+               {/* API画像がある場合はそれを表示、なければスキャン画像を表示 */}
+               {(images && images.length > 0 ? images.slice(0, 3) : MENU_SCANS).map((imgOrSrc, idx) => {
+                 const src = typeof imgOrSrc === 'string' ? imgOrSrc : imgOrSrc.src;
+                 const alt = typeof imgOrSrc === 'string' ? 'Menu Photo' : imgOrSrc.alt;
+                 return (
+                    <div key={idx} className="bg-white p-2 shadow-lg rounded-sm border border-stone-200 group cursor-pointer">
+                        <div className="aspect-[3/4] relative overflow-hidden bg-stone-100">
+                        <img 
+                            src={src} 
+                            alt={alt} 
+                            className="w-full h-full object-contain md:object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            {alt}
+                        </div>
+                        </div>
                     </div>
-                 </div>
-               ))}
+                 );
+               })}
             </div>
         </div>
 

@@ -1,6 +1,16 @@
+
 import React from 'react';
 
-const Concept: React.FC = () => {
+interface ConceptProps {
+  images?: string[];
+}
+
+const Concept: React.FC<ConceptProps> = ({ images }) => {
+  // Use provided images or fallback to placeholders
+  const chefImage = images?.[0] || "https://picsum.photos/600/300?random=5";
+  const mainImage = images?.[1] || "https://picsum.photos/600/800?random=1";
+  const detailImage = images?.[2] || "https://picsum.photos/200/200?random=2";
+
   return (
     <section id="concept" className="py-20 bg-kaine-bg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -19,17 +29,17 @@ const Concept: React.FC = () => {
               木の温もりを感じる店内で、心安らぐひとときをお過ごしください。
             </p>
             <div className="pt-4">
-                <img src="https://picsum.photos/600/300?random=5" alt="Chef cooking" className="w-full h-48 object-cover rounded-sm shadow-md opacity-90 grayscale hover:grayscale-0 transition-all duration-700" />
+                <img src={chefImage} alt="Chef cooking or dish" className="w-full h-48 object-cover rounded-sm shadow-md opacity-90 grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
           <div className="order-1 md:order-2 relative">
              <img 
-                src="https://picsum.photos/600/800?random=1" 
+                src={mainImage} 
                 alt="Kaine Atmosphere" 
                 className="w-full h-[500px] object-cover rounded-sm shadow-xl"
              />
              <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-white p-4 shadow-lg hidden md:block">
-                <img src="https://picsum.photos/200/200?random=2" alt="Detail" className="w-full h-full object-cover" />
+                <img src={detailImage} alt="Detail" className="w-full h-full object-cover" />
              </div>
           </div>
         </div>

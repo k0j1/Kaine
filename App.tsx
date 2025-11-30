@@ -22,9 +22,15 @@ const App: React.FC = () => {
     }
   };
 
-  // 最初の写真をHeroに、残りをGalleryに使用
+  // 写真を各セクションに分配
+  // [0]: Hero
+  // [1-3]: Concept (3枚)
+  // [4-6]: Menu (3枚)
+  // [7-]: Gallery (残り)
   const heroPhoto = photos.length > 0 ? photos[0] : undefined;
-  const galleryPhotos = photos.length > 1 ? photos.slice(1) : undefined;
+  const conceptPhotos = photos.length > 1 ? photos.slice(1, 4) : undefined;
+  const menuPhotos = photos.length > 4 ? photos.slice(4, 7) : undefined;
+  const galleryPhotos = photos.length > 7 ? photos.slice(7) : undefined;
 
   return (
     <div className="min-h-screen bg-kaine-bg font-sans">
@@ -32,8 +38,8 @@ const App: React.FC = () => {
       
       <main>
         <Hero heroImage={heroPhoto} />
-        <Concept />
-        <MenuSection />
+        <Concept images={conceptPhotos} />
+        <MenuSection images={menuPhotos} />
         <Gallery apiImages={galleryPhotos} />
         <ReserveSection />
         <AccessSection />
