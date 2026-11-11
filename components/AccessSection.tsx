@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { MapPin, Car } from 'lucide-react';
-import { ADDRESS, PARKING_IMAGE_URL } from '../constants';
+import { ADDRESS, PARKING_IMAGE_URL, GOOGLE_MAPS_LOCATION_URL } from '../constants';
 
 const AccessSection: React.FC = () => {
   return (
@@ -34,12 +34,12 @@ const AccessSection: React.FC = () => {
                 <div className="flex justify-between items-start text-sm text-gray-600">
                     <span>{ADDRESS}</span>
                     <a 
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`}
+                        href={GOOGLE_MAPS_LOCATION_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-kaine-accent hover:text-kaine-gold underline decoration-1 underline-offset-4 whitespace-nowrap ml-4"
+                        className="text-kaine-accent hover:text-kaine-gold underline decoration-1 underline-offset-4 whitespace-nowrap ml-4 flex items-center gap-1"
                     >
-                        Google Mapで見る
+                        <span>Googleマップで見る</span>
                     </a>
                 </div>
             </div>

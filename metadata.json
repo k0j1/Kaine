@@ -1,5 +1,6 @@
 {
   "name": "割烹食堂かいね",
   "description": "Official website for Kappo Shokudo Kaine in Koriyama, featuring seasonal menus, store information, and an AI concierge.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

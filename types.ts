@@ -1,3 +1,4 @@
+
 export enum MenuCategory {
   LUNCH = 'Lunch',
   SIDES = 'Lunch Sides',
@@ -31,3 +32,90 @@ export interface ChatMessage {
   text: string;
   isThinking?: boolean;
 }
+
+export interface MediaLink {
+  id: string;
+  siteName: string;
+  description: string;
+  url: string;
+  image: string;
+  tags: string[];
+}
+
+/**
+ * 割烹食堂かいね 料理写真のカテゴリ分類
+ */
+export enum PlacePhotoCategory {
+  ALL = 'ALL',
+  SIGNATURE = 'SIGNATURE',   // 名物定食（鶏かつ・レバかつ等）
+  SEAFOOD = 'SEAFOOD',       // 鮮魚・お造り・海鮮丼
+  SEASONAL = 'SEASONAL',     // 季節の土鍋ご飯・旬の一皿・椀物
+  ALACARTE = 'ALACARTE',     // 割烹一品・酒菜・おつまみ
+  SAKE = 'SAKE',             // 厳選地酒・日本酒
+  INTERIOR = 'INTERIOR'      // 店舗空間・カウンター・雰囲気
+}
+
+/**
+ * 割烹食堂かいね 料理写真のデータ構造
+ */
+export interface PlacePhoto {
+  id: string;
+  title: string;
+  category: PlacePhotoCategory;
+  imageUrl: string;
+  thumbnailUrl?: string;
+  description: string;
+  price?: string;
+  googleMapsUrl: string;
+  authorName?: string;
+  rating?: number;
+  featured?: boolean;
+  tags: string[];
+  has3D?: boolean;
+  video3DUrl?: string;
+}
+
+/**
+ * ライトペーパー（仕様書・料理技術解説書）のセクションデータ
+ */
+export interface LightpaperSection {
+  id: string;
+  title: string;
+  subtitle: string;
+  content: string[];
+  specs?: { label: string; value: string }[];
+}
+
+/**
+ * 割烹食堂かいね「こだわり」記事の柱データ構造（note公式記事準拠）
+ */
+export interface CommitmentPillar {
+  id: string;
+  number: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  details: string[];
+  image: string;
+  tag: string;
+}
+
+/**
+ * 3D 360°回転料理モデルデータ
+ */
+export interface Dish3DItem {
+  id: string;
+  dishId: string;
+  title: string;
+  subtitle: string;
+  videoUrl: string;
+  thumbnailUrl: string;
+  description: string;
+  duration: number; // 10.027秒
+  tags: string[];
+  specs: {
+    label: string;
+    value: string;
+  }[];
+}
+

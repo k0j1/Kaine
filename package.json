@@ -1,18 +1,19 @@
 {
   "name": "kaine-website",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.6",
   "type": "module",
   "homepage": "https://k0j1.github.io/Kaine",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts,.tsx",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@farcaster/miniapp-sdk": "^0.4.0",
     "@google/genai": "*",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/parser": "^8.72.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",

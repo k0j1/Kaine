@@ -1,0 +1,17 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "割烹食堂かいね",
+    "iconUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?w=256&h=256&fit=crop",
+    "homeUrl": "https://k0j1.github.io/Kaine/",
+    "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&h=630&fit=crop",
+    "buttonTitle": "割烹食堂かいねを見る",
+    "splashImageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?w=512&h=512&fit=crop",
+    "splashBackgroundColor": "#1a1a1a"
+  }
+}
