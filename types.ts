@@ -50,6 +50,8 @@ export enum PlacePhotoCategory {
   SIGNATURE = 'SIGNATURE',   // 名物定食（鶏かつ・レバかつ等）
   SEAFOOD = 'SEAFOOD',       // 鮮魚・お造り・海鮮丼
   SEASONAL = 'SEASONAL',     // 季節の土鍋ご飯・旬の一皿・椀物
+  MEAT_LOWTEMP = 'MEAT_LOWTEMP', // 低温火入の肉料理（公式note連載）
+  NOODLES = 'NOODLES',       // 特製 麺料理（公式note連載）
   ALACARTE = 'ALACARTE',     // 割烹一品・酒菜・おつまみ
   SAKE = 'SAKE',             // 厳選地酒・日本酒
   INTERIOR = 'INTERIOR'      // 店舗空間・カウンター・雰囲気
@@ -62,12 +64,16 @@ export interface PlacePhoto {
   id: string;
   title: string;
   category: PlacePhotoCategory;
+  subCategory?: string;
   imageUrl: string;
+  altImageUrl?: string;
   thumbnailUrl?: string;
   description: string;
   price?: string;
   googleMapsUrl: string;
   authorName?: string;
+  sourceArticleUrl?: string;
+  sourceArticleTitle?: string;
   rating?: number;
   featured?: boolean;
   tags: string[];

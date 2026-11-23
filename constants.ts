@@ -1,7 +1,7 @@
 
-import { MenuCategory, MenuSectionData, InstagramPost, MediaLink, PlacePhoto, PlacePhotoCategory, LightpaperSection, CommitmentPillar } from './types';
+import { MenuCategory, MenuSectionData, MediaLink, PlacePhoto, PlacePhotoCategory, LightpaperSection, CommitmentPillar } from './types';
 
-export const APP_VERSION = "1.0.6";
+export const APP_VERSION = "1.0.9";
 export const SITE_NAME = "割烹食堂かいね";
 export const SITE_SUBTITLE = "Kappo Shokudo Kaine";
 
@@ -11,6 +11,10 @@ export const PHONE_NUMBER = "024-954-4579";
 export const RESERVATION_URL = "https://www.instagram.com/kaine_cuisine/";
 // 公式note記事リンク（割烹食堂かいねのこだわり）
 export const NOTE_ARTICLE_URL = "https://note.com/firm_emu2667/n/nf27eed0b29ce";
+// 公式note記事リンク（低温火入の肉料理・全21品）
+export const NOTE_MEAT_ARTICLE_URL = "https://note.com/firm_emu2667/n/n2f10b059166f";
+// 公式note記事リンク（麺料理・全11品）
+export const NOTE_NOODLE_ARTICLE_URL = "https://note.com/firm_emu2667/n/nc0e9b07a2b93";
 // 店舗アクセス用Googleマップリンク
 export const GOOGLE_MAPS_LOCATION_URL = "https://www.google.com/maps/search/?api=1&query=%E5%89%B2%E7%83%99%E9%A3%9F%E5%A0%82%E3%81%8B%E3%81%84%E3%81%AD+%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%83%A1%E5%B1%B1%E5%B8%82";
 
@@ -97,16 +101,8 @@ export const KAINE_COMMITMENT_PILLARS: CommitmentPillar[] = [
 
 
 
-// Placeholders for the images provided in the prompt. 
-// In a real deployment, replace these URLs with the actual hosted image URLs.
-export const MENU_SCANS = [
-  { src: "https://placehold.co/600x850/f5f5f0/1a1a1a?text=Lunch+Menu+Scan", alt: "定食メニュー" },
-  { src: "https://placehold.co/600x850/f5f5f0/1a1a1a?text=Ippin+Menu+Scan", alt: "一品メニュー" },
-  { src: "https://placehold.co/600x850/f5f5f0/1a1a1a?text=Drink+Menu+Scan", alt: "ドリンクメニュー" }
-];
-
-// Google Driveの画像を直接表示するためのURL
-export const PARKING_IMAGE_URL = "https://drive.google.com/uc?export=view&id=1u0MrL7ZpTTTwqMaFCG349yWCSBzlGUKa";
+// 添付された実際の割烹食堂かいね 駐車場案内図
+export const PARKING_IMAGE_URL = "assets/aistudio/image_3bbb772d.png";
 
 export const MENU_DATA: MenuSectionData[] = [
   {
@@ -180,13 +176,6 @@ export const GALLERY_IMAGES = [
   { id: 'g5', src: 'https://picsum.photos/800/400?random=105', alt: 'Interior Atmosphere', span: 'col-span-2 row-span-1' },
 ];
 
-export const INSTAGRAM_POSTS: InstagramPost[] = [
-  { id: '1', imageUrl: 'https://picsum.photos/400/400?random=20', caption: '【季節の土鍋ご飯】今月は桜海老と筍の土鍋ご飯です。蓋を開けた瞬間の香りをお楽しみください。 #郡山グルメ #土鍋ご飯', likes: 85 },
-  { id: '2', imageUrl: 'https://picsum.photos/400/400?random=21', caption: '本日の特選素材。立派な金目鯛が入荷しました。煮付けや炙り刺しでどうぞ。 #割烹食堂かいね #郡山ディナー', likes: 72 },
-  { id: '3', imageUrl: 'https://picsum.photos/400/400?random=22', caption: 'ランチの一番人気「かいね御膳」。少しずつ色々な料理を楽しめると好評です。 #郡山ランチ', likes: 94 },
-  { id: '4', imageUrl: 'https://picsum.photos/400/400?random=23', caption: '福島の地酒、新しい銘柄が入りました。春限定の「かすみ酒」もございます。 #日本酒 #福島', likes: 66 },
-];
-
 export const MEDIA_LINKS: MediaLink[] = [
   {
     id: 'note',
@@ -195,6 +184,22 @@ export const MEDIA_LINKS: MediaLink[] = [
     url: NOTE_ARTICLE_URL,
     image: 'assets/aistudio/Img_2025_04_12_12_59_49_104cbefa.jpeg',
     tags: ['店主のこだわり', '公式note記事', '自家製調味料', '料理哲学']
+  },
+  {
+    id: 'note-meat',
+    siteName: '公式 note「低温火入の肉料理」',
+    description: '看板の「鶏かつ」をはじめ、福島牛・仙台牛ステーキ、低温調理レバニラ、豚かしら、ロースト3種盛り合わせまで、温度と時間にこだわり抜いた全21品の肉料理アーカイブ。',
+    url: NOTE_MEAT_ARTICLE_URL,
+    image: 'https://assets.st-note.com/img/1795433930-ElUqyfiWhrcV9OwQMP6N70J5.png',
+    tags: ['低温火入', '鶏かつ・鶏レバー', '福島牛・仙台牛', '全21品掲載']
+  },
+  {
+    id: 'note-noodles',
+    siteName: '公式 note「特製 麺料理」',
+    description: '三色素麺・梅そうめんから鯛出汁塩だれラーメン、本鮪の目玉出汁カレーうどん、鴨葱・葱鮪蕎麦、鮪の肉味噌冷麺、塩出汁米麺まで、出汁が主役の全11品の麺料理特集。',
+    url: NOTE_NOODLE_ARTICLE_URL,
+    image: 'https://assets.st-note.com/img/1795435808-dVKg8Nyec59MA76tmYvRFJCi.png',
+    tags: ['和食屋の麺料理', '本格出汁', '蕎麦・うどん・冷麺', '全11品掲載']
   },
   {
     id: 'instagram',
@@ -294,6 +299,480 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     rating: 5,
     featured: true,
     tags: ['生アオサ海苔', '天然鮮魚', '金胡麻', '市場直送']
+  },
+  // =========================================================================
+  // 公式note「【割烹食堂かいね】低温火入の肉料理」全21品
+  // https://note.com/firm_emu2667/n/n2f10b059166f
+  // =========================================================================
+  // --- 鶏料理 (7品) ---
+  {
+    id: 'note-meat-1',
+    title: '鶏かつ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1795433930-ElUqyfiWhrcV9OwQMP6N70J5.png',
+    description: '当店昼の看板メニュー、低温火入れによって仕上げる国産鶏ももかつ。じっくりと低温で火入れし続ける事でしっとり柔らかく皮で覆うように巻くことで、よりジューシーに仕上げています。出汁に1晩漬け込んで火入れをする事で独特の臭みや雑味を抑えこみ旨味を増しています。干し椎茸や昆布をふんだんに使って仕込む特製出汁ソースに、季節の果実等を使った自家製の塩を添えてお召し上がりください。',
+    price: '昼の看板メニュー',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    featured: true,
+    tags: ['低温火入', '国産鶏もも', '出汁ソース', '果実塩']
+  },
+  {
+    id: 'note-meat-2',
+    title: '鶏レバニラ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1795434765-Bn2OsDrA9M3HthUmEpYyd64T.png',
+    altImageUrl: 'https://assets.st-note.com/img/1795437068-6PZTtguxmQeO5B7pFfSbjV8q.png',
+    description: '丁寧な下処理で血生臭さは感じさせない上品な味わいでトロトロの食感と濃厚な味わいが魅力。にんにくやバター、りんごや唐辛子を加えた特製辛味噌で仕上げるニラダレをたっぷりとかけてお召し上がりください。（低温で1時間以上かけて火入をした鶏のレバーとハツを使用）',
+    price: '低温調理 鶏料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    featured: true,
+    tags: ['低温火入', '鶏レバー', '特製辛味噌', 'ニラダレ']
+  },
+  {
+    id: 'note-meat-3',
+    title: '鶏レバニラ ニンニク味噌',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1775693958-kpjmNu3FbslQn5z7KctSGTZy.png',
+    description: '低温調理をした鶏レバーはクセがなくねっとり濃厚な味わい。たっぷりのニラと甘めのニンニク味噌バターの濃い味付けが好相性。ご飯が進みます。',
+    price: '低温調理 鶏料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '鶏レバー', 'ニラ', 'ニンニク味噌バター']
+  },
+  {
+    id: 'note-meat-4',
+    title: '鶏レバ刺し',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1795429375-QoeJIc5OdhuYaD3l1pGg4nm2.png',
+    description: '丁寧な下処理と低温火入れで仕上げた、ねっとり濃厚で臭みのない上品な鶏レバ刺し。',
+    price: '低温調理 鶏料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '鶏レバー', '鶏レバ刺し']
+  },
+  {
+    id: 'note-meat-5',
+    title: '鶏レバミルクチーズ煮定食',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1795428355-oRrvVD5amLz3KPBEFqYU26hN.png',
+    description: 'ミルク＋出汁＋チーズの濃厚な旨味が低温火入で仕上がるねっとり鶏レバーとも相性抜群です。通常メニューのレバかつとはひと味違う味わいを是非ご賞味下さい。',
+    price: '低温調理 定食',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', 'ミルク', '出汁', 'チーズ']
+  },
+  {
+    id: 'note-meat-6',
+    title: '鶏天定食',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1795427739-rmMs0fHTW5NivtYj31wLSGdk.png',
+    description: '63℃約2時間半火入れをした鶏胸肉を使用。鶏胸肉でも肉質は固くなっておらず、柔らかくしっとり仕上がります。脂身はほんのり甘いので、たっぷりのおろしポン酢でお召し上がりください。',
+    price: '低温調理 定食',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['鶏胸肉', '63℃低温火入', '大根おろし', 'ポン酢']
+  },
+  {
+    id: 'note-meat-7',
+    title: '鶏天丼と梅乳麺定食',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '鶏料理',
+    imageUrl: 'https://assets.st-note.com/img/1775694215-CuckGIQbl1SPBeE8nRho46zi.png',
+    description: '低温で仕上げた鶏胸肉はしっとり柔らか仕立て。ご飯と合うよう甘だれをたっぷりかけて提供します。乳麺（あたたかい素麺）は梅を練りこんだ麺を使用。',
+    price: '低温調理 定食',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '鶏天丼', '梅乳麺']
+  },
+  // --- 牛料理 (9品) ---
+  {
+    id: 'note-meat-8',
+    title: '福島牛ガーリックステーキ丼',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795428791-Z5EubamsqiH9w74DTv1pYQJN.png',
+    description: '福島牛ザブトン（肩ロース芯）を使用。たっぷりのにんにくで香り出しをしたオイルで両面さっと焼き上げレア仕立てにして、肉汁にきのこを加えてバターと焦がし醤油で仕上げてご飯も進む濃厚な味わいです。行者にんにくの醤油漬けを添えて、天にはサクサクのにんにくチップをたっぷりとかけてお召し上がりください。',
+    price: '厳選 牛料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    featured: true,
+    tags: ['福島牛', 'ザブトン', '焦がし醤油', '行者にんにく']
+  },
+  {
+    id: 'note-meat-9',
+    title: '和牛ガーリックステーキ丼 ~濃厚ソース仕立て~',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795436467-bsrMc1f9Eje4XORQgw5tSUzy.png',
+    description: '国産牛（福島牛など仕入れにより）を強火でサッと炙りレア仕立てでガツンとニンニクを効かせて、肉汁とバター醤油を加えた濃厚ソースをたっぷりとかけているのでご飯が進みます。',
+    price: '厳選 牛料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['国産牛', '炙りレア', 'バター醤油', 'ニンニク']
+  },
+  {
+    id: 'note-meat-10',
+    title: '和牛ローストビーフ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795434213-Fxj6tbeCGoknQcUuf849AZWL.png',
+    description: '12時間低温火入れした国産牛もも、程よくサシも入っているので、口当たりもよくしっとり柔らか、甘みもしっかり感じる仕上がりに。玉ねぎをふんだんに使って肉汁と共にじっくりと煮詰めた甘辛ソースと季節の塩を添えてお召し上がりください。',
+    price: '12時間低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    featured: true,
+    tags: ['低温火入', '国産牛もも', '甘辛ソース', '季節塩']
+  },
+  {
+    id: 'note-meat-11',
+    title: '和牛ローストビーフ丼 ~塩山葵タレ~',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795436219-6FWsyYd0q28La7cCZVxpuI31.png',
+    description: '低温で半日以上かけて仕込む当店自慢のローストビーフ。程よくサシの入った和牛モモ肉は出汁に1晩漬け込む事で独特の臭みは感じさせず旨味を閉じ込めています。じっくりと火入れする事で驚く程しっとり柔らかく噛むほどに脂の優しい甘さ、牛の旨味が堪能出来ます。本山葵と牛の出汁を活かした塩山葵のタレを添えて。',
+    price: '半日以上低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '和牛モモ', 'ローストビーフ', '塩山葵']
+  },
+  {
+    id: 'note-meat-12',
+    title: '国産牛もも ローストビーフ丼 ~塩わさび~',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795432133-NobIFgPRkaED3e6pMOXs40yh.png',
+    description: 'A4等級福島県産牛もものブロック肉を丸一日幽庵地に漬け込み、5時間かけて低温火入れ。程よいサシで口当たり滑らか、とろける口溶け。牛の旨味の詰まった出汁を煮詰めて甘辛く仕上げました。本生わさびをふんだんに加えた塩わさびダレを添えて。',
+    price: 'A4等級 福島牛',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['A4等級', '福島牛', '幽庵地', '塩わさび']
+  },
+  {
+    id: 'note-meat-13',
+    title: '仙台牛肩ロースガーリックステーキ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795433078-iGWfKzMYFj47op5lswNy8xZI.png',
+    description: '融点の低い仙台牛は柔らかく口溶けが良い。クリーミーな脂の甘み、旨み。サシと赤身のバランスが絶妙で肉汁を活かしたコクのある濃厚なガーリックソースが食欲をそそります。',
+    price: '仙台牛 特選',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['仙台牛', '肩ロース', 'ガーリックソース']
+  },
+  {
+    id: 'note-meat-14',
+    title: '仙台牛ハツステーキ ~レモンバター醤油~',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795432776-3Fsw0H9WZlEOXftJkPSx6qvg.png',
+    description: 'コリコリ食感は残しつつ歯切れの良い柔らかさは低温火入ならではです。肉汁にレモンバター醤油を加えてコクがありながら、さっぱりとした味わいに仕上がりました。',
+    price: '仙台牛 低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '仙台牛', 'ハツ', 'レモンバター醤油']
+  },
+  {
+    id: 'note-meat-15',
+    title: '和牛ハツステーキ ~ニンニクねぎ塩~',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795434511-HdtGfzsgS4hXjTiYBPonc1q2.png',
+    description: '低温火入れしたハツをさっと焼き目をつけ、ニンニクと胡麻で香りを引き立てレモン汁、玉葱と長葱をふんだんに加えた特製ねぎ塩だれをたっぷりとかけてお召し上がりください。',
+    price: '和牛 低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '和牛', 'ハツ', '特製ねぎ塩だれ']
+  },
+  {
+    id: 'note-meat-16',
+    title: '上ミノステーキ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '牛料理',
+    imageUrl: 'https://assets.st-note.com/img/1795435218-1oOD7xgHyhNiJCd5KFZej9vT.png',
+    description: '肉厚な和牛の上ミノを使用。下処理は最低限に留め旨味は逃さずに出汁に漬け込んで旨味を補っています。低温火入の効果でよりジューシーにさっと焼き色をつけて、コリコリ食感は残しつつ濃厚な辛味噌バター仕立てが上ミノの旨味とマッチします。',
+    price: '和牛 低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '和牛上ミノ', '出汁漬け', '辛味噌バター']
+  },
+  // --- 豚料理 (4品) ---
+  {
+    id: 'note-meat-17',
+    title: '豚かしらガーリックステーキ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '豚料理',
+    imageUrl: 'https://assets.st-note.com/img/1795432611-YwkvUPgONK4BQZnfF5DRGXq6.png',
+    description: '低温でじっくり5時間火入れした豚のかしらはまるで上質なハムのよう。表面をさっと炙って、ニンニクをがっつりと効かせたバター醤油をたっぷりとかけてお召し上がりください。',
+    price: '5時間低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '豚かしら', 'バター醤油', 'ガーリック']
+  },
+  {
+    id: 'note-meat-18',
+    title: 'ローストポークステーキ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '豚料理',
+    imageUrl: 'https://assets.st-note.com/img/1795428512-PIajpdA9Z0es2GY5RygMOhz1.png',
+    description: '国産豚ひれ、肩ロース、バラを低温で15時間火入れする事で柔らかくジューシーに仕上げています。煮汁を活かした濃厚ガーリックバターソースをたっぷりとかけて。',
+    price: '15時間低温火入',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['国産豚', '15時間低温火入', 'ガーリックバターソース']
+  },
+  {
+    id: 'note-meat-19',
+    title: '国産豚バラ＋肩ロース葱塩レモンステーキ',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '豚料理',
+    imageUrl: 'https://assets.st-note.com/img/1795436943-HbyC1id3gGnDvPO6TF8IsXKU.png',
+    description: '低温で火入した豚肉はしっとり柔らかく長ねぎとにんにく・胡麻をふんだんに使用した濃厚葱塩ダレですが、仕上げに檸檬を加える事でコクもあり爽やかな味わいがクドさを感じさせません。',
+    price: '低温調理 豚料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '豚バラ', '豚肩ロース', '葱塩ダレ']
+  },
+  {
+    id: 'note-meat-20',
+    title: '国産豚タンステーキ ~ねぎ塩檸檬仕立~',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '豚料理',
+    imageUrl: 'https://assets.st-note.com/img/1795435017-N5sqVmvweThy0Yoli8rGWCfI.png',
+    description: '国産豚の舌先から元まで使用。余分な脂や旨味まで抜けてしまうため下処理・臭み抜き等は丁寧かつ最低限にして、出汁に漬け込み特有の雑味を抑え込み旨味を補っています。低温火入をしてから表面をサッと炙り檸檬＋ねぎ塩だれをたっぷりとかけてお召し上がりください。',
+    price: '低温調理 豚料理',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    tags: ['低温火入', '国産豚タン', '出汁漬け', 'ねぎ塩檸檬']
+  },
+  // --- 盛り合わせ (1品) ---
+  {
+    id: 'note-meat-21',
+    title: 'ロースト3種',
+    category: PlacePhotoCategory.MEAT_LOWTEMP,
+    subCategory: '盛り合わせ',
+    imageUrl: 'https://assets.st-note.com/img/1795432320-4pu9QPsjCXJ31RNkmaLDGTKv.png',
+    description: '国産A4等級牛もも肉 低温10時間火入れ ~塩本わさびたれ~／国産豚肩ロース肉 低温18時間火入れ ~胡麻ねぎ塩だれ~／米国産牛タン 低温20時間火入れ ~にんにくねぎ塩レモンだれ~。それぞれの肉質に合わせて最適の温度帯と時間で調整して仕上げています。肉汁も余すことなく使用した濃厚仕立てのたれでお召し上がりください。',
+    price: '特選 3種盛り合わせ',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 低温火入の肉料理',
+    sourceArticleUrl: NOTE_MEAT_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】低温火入の肉料理',
+    featured: true,
+    tags: ['A4牛もも10h', '豚肩ロース18h', '牛タン20h', '3種盛り合わせ']
+  },
+  // =========================================================================
+  // 公式note「【割烹食堂かいね】麺料理」全11品
+  // https://note.com/firm_emu2667/n/nc0e9b07a2b93
+  // =========================================================================
+  // --- 素麺（そうめん） (2品) ---
+  {
+    id: 'note-noodle-1',
+    title: '三色素麺〜とまと出汁〜定食',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '素麺（そうめん）',
+    imageUrl: 'https://assets.st-note.com/img/1777419724-MwX2D9FEhcbRirOtlIQ0p6aj.png',
+    description: '茶・玉子・梅の三種そうめんの合盛り。天にはみょうがを添えて、そうめんの周りには出汁水を散らしています。とまとと昆布でひいた出汁は旨味たっぷりで、刻んだおくらと大葉、とまとを加えたつゆに絡ませてさっぱりと召し上がれます。',
+    price: '素麺 定食',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['茶・玉子・梅そうめん', 'とまと昆布出汁', '出汁水']
+  },
+  {
+    id: 'note-noodle-2',
+    title: '梅そうめん',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '素麺（そうめん）',
+    imageUrl: 'https://assets.st-note.com/img/1795435679-m5Et1oaLnlAOIVJkXSPdr6D4.png',
+    description: 'トマトの旨味が詰まったほんのり酸味を効かせた出汁は梅を麺に練りこんだ梅そうめんとの相性も抜群。定食のお供に、夜の〆の1杯にもおすすめ。',
+    price: '素麺・〆の一杯',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['梅そうめん', 'トマト出汁', '〆の一杯']
+  },
+  // --- ラーメン (1品) ---
+  {
+    id: 'note-noodle-3',
+    title: '鯛出汁塩だれ鶏ももラーメン',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: 'ラーメン',
+    imageUrl: 'https://assets.st-note.com/img/1795435808-dVKg8Nyec59MA76tmYvRFJCi.png',
+    description: '鯛をメインに数種の魚介と昆布を炊き合わせた出汁をじっくり煮詰めた自家製の塩ダレで仕上げる、すっきりとした味わいの塩出汁ラーメン。灰分の低い良質小麦の麺に低温火入れ鶏ももをのせた、飲んだ後の締めにもおすすめの一杯です。',
+    price: '魚介塩出汁ラーメン',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    featured: true,
+    tags: ['鯛出汁', '自家製塩ダレ', '低温火入鶏もも', '昆布']
+  },
+  // --- うどん (3品) ---
+  {
+    id: 'note-noodle-4',
+    title: '豆乳クリーミーカレーうどん',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: 'うどん',
+    imageUrl: 'https://assets.st-note.com/img/1795436112-rMfPpxYRm2IigeCQkqwaFycz.png',
+    description: '鰤のカブトとソイ、昆布と鰹の合わせ出汁に豆乳をベースに練り上げたカレーを合わせ、濃厚な魚の出汁とコクが味わえる特製カレーうどん。コシのある喉越しの良い麺とも相性抜群です。',
+    price: '特製 うどん',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['鰤・ソイ魚出汁', '鰹昆布出汁', '豆乳カレー']
+  },
+  {
+    id: 'note-noodle-5',
+    title: '濃厚豆乳クリーミーカレーうどん ~本鮪の目玉出汁仕立て 讃岐生うどん~',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: 'うどん',
+    imageUrl: 'https://assets.st-note.com/img/1795436109-lJMu2f0tKDZOev98sYX5VjnC.png',
+    description: '本鮪の目玉の濃厚な出汁を活かした特製カレーうどん。国産大豆100%「スゴイダイズ」をベースに使用し、本鮪の目玉の脂や出汁のコクと調和した深い余韻が楽しめます。',
+    price: '本鮪出汁 讃岐生うどん',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    featured: true,
+    tags: ['本鮪目玉出汁', '讃岐生うどん', 'スゴイダイズ', '濃厚カレー']
+  },
+  {
+    id: 'note-noodle-6',
+    title: '春野菜出汁桜うどん',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: 'うどん',
+    imageUrl: 'https://assets.st-note.com/img/1795436112-SoIFO0rJ35xZnHVCEvb6Ly19.png',
+    description: '春野菜のおひたしの出汁に、ほんのりと桜の味わいと香りを纏った桜うどんが織りなす季節の一杯。',
+    price: '季節の桜うどん',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['桜うどん', '春野菜', 'おひたし出汁']
+  },
+  // --- 蕎麦（そば） (2品) ---
+  {
+    id: 'note-noodle-7',
+    title: '鴨葱蕎麦',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '蕎麦（そば）',
+    imageUrl: 'https://assets.st-note.com/img/1795322700-gTDZtAKPWQpJS4n8aj7oHFGM.png',
+    description: '鴨の切り身に蕎麦粉を纏わせて炙ってから鴨出汁を摂ることで旨味の強い出汁に仕上がっています。お昼の定食には自家製たらこを乗せたいなり寿司をセットでご提供。',
+    price: '本格 蕎麦',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['炙り鴨出汁', '蕎麦', '自家製たらこいなり']
+  },
+  {
+    id: 'note-noodle-8',
+    title: '葱鮪（ねぎま）蕎麦 ~鮪天ぷら付~',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '蕎麦（そば）',
+    imageUrl: 'https://assets.st-note.com/img/1795323254-FlcSBwYzbv1U57rsLW2akNny.png',
+    description: '醤油と昆布の旨味を加えた出汁に炙った葱と本鮪の脂身から摂る濃厚鮪出汁。3種の蕎麦粉と山芋で打った極細ながらコシのある3割蕎麦に、鮪赤身の天ぷらと春菊を添えて。',
+    price: '鮪天ぷら付 蕎麦',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['本鮪脂身出汁', '3種蕎麦粉・山芋', '鮪天ぷら', '春菊']
+  },
+  // --- 冷麺（れいめん） (2品) ---
+  {
+    id: 'note-noodle-9',
+    title: '鮪の肉味噌冷麺',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '冷麺（れいめん）',
+    imageUrl: 'https://assets.st-note.com/img/1795323474-pnkDO51G9a2RoQE8vB7Y6Swi.png',
+    description: '鮪の中落ちをふんだんに叩いてひき肉仕立てに。ニンニク・生姜・胡麻の香りに玉ねぎとトマト、出汁を加えた味噌仕立てのコクのある漬け汁が蕎麦粉入りの韓国風冷麺と好相性。',
+    price: '特製 冷麺',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['鮪中落ち', '肉味噌漬け汁', '蕎麦粉冷麺']
+  },
+  {
+    id: 'note-noodle-10',
+    title: '胡麻味噌冷麺',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '冷麺（れいめん）',
+    imageUrl: 'https://assets.st-note.com/img/1795435962-SnaltTx1ijJPe4DwF9dkmchG.png',
+    description: '白練り胡麻をベースに味噌を加えて仕込む特製出汁に、蕎麦粉や馬鈴薯澱粉を練りこんだ香り良くコシのある韓国風の麺を使用。旬の野菜を添えた夏季のおすすめメニュー。',
+    price: '夏季限定 冷麺',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['白練り胡麻', '味噌出汁', '韓国風麺', '旬野菜']
+  },
+  // --- 米麺（こめめん） (1品) ---
+  {
+    id: 'note-noodle-11',
+    title: '塩出汁米麺（サイドメニュー）',
+    category: PlacePhotoCategory.NOODLES,
+    subCategory: '米麺（こめめん）',
+    imageUrl: 'https://assets.st-note.com/img/1777419546-qA28zlhW6eDPJpiHT9jtQOad.png',
+    description: '昆布と鰹の優しい吸い地に米＋タピオカのもっちり麺を合わせ、魚の出汁を煮詰めて作る特製塩ダレをかけた魚介の旨味広がるお米の麺。〆にもおすすめです。',
+    price: 'サイドメニュー・〆',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 特製 麺料理',
+    sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】麺料理',
+    tags: ['米＋タピオカ麺', '昆布鰹吸い地', '特製塩ダレ']
   }
 ];
 
@@ -336,6 +815,9 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
     title: 'デジタル体験仕様・アップデート履歴',
     subtitle: 'WebサイトおよびFarcaster Mini App連携の技術仕様',
     content: [
+      '【v1.0.9 アップデート】駐車場のご案内セクションの駐車場案内図を店舗提供の公式案内図（店舗すぐそば6台 ＋ 斜め向かい「tictac hair」様ビル裏の契約駐車場4台〔4・5・8・9番〕、全10台詳細図）へ差し替え、拡大表示に対応しました。',
+      '【v1.0.8 アップデート】仮表示の「メニュー写真」セクションおよびInstagramサンプル写真フィードセクションを削除し、実物のお料理写真と公式note特集料理のみで構成されたクリーンな構成に整理しました。',
+      '【v1.0.7 アップデート】割烹食堂かいね公式noteの2大レシピ特集記事「低温火入の肉料理（全21品）」および「麺料理（全11品）」から全32品のお料理データ（写真・調理解説・カテゴリ・サブカテゴリ・素材タグ・note記事リンク）を完全取り込み。ギャラリーにカテゴリ別フィルター（鶏/牛/豚/盛り合わせ、素麺/ラーメン/うどん/蕎麦/冷麺/米麺）とキーワード検索、画像読み込みフォールバックを実装しました。',
       '【v1.0.6 アップデート】AIコンシェルジュ機能を完全に削除。',
       '【v1.0.5 アップデート】ご提供いただいた360度ターンテーブル撮影動画から料理を全方位から立体的に確認できる「3D 360°インタラクティブ料理ビューアー」機能を新設。「本鮪の贅沢炙り丼」「桜生麩と丸大根の割烹椀」の2品において、左右ドラッグ・スワイプによる360度シームレス回転、視点プリセット（正面0°・右面90°・背面180°・左面270°）、ズーム拡大検査が可能になりました。',
       '【v1.0.4 アップデート】公式note記事「割烹食堂かいねのこだわり（https://note.com/firm_emu2667/n/nf27eed0b29ce）」への公式リンクを追加。noteで語られている「店名（海の音色）に込めた想い」「毎日変わる一期一会のお品書き」「調味料まで手作りのこだわり」「最高の一杯を届ける姿勢」「割烹と食堂のおもてなし」の5大柱をこだわりセクション（Concept）およびメディアセクションに完全統合。',
@@ -344,10 +826,11 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
       '【v1.0.1 アップデート】Farcaster Mini Apps SDK初期化処理（sdk.actions.ready）、単一グローバルテーマ（AppTheme）統制、OOPデータモデル（PhotoItemModel / GalleryService）の導入。'
     ],
     specs: [
-      { label: '現在バージョン', value: 'v1.0.6' },
+      { label: '現在バージョン', value: 'v1.0.9' },
+      { label: '掲載料理点数', value: '実写特選4品 ＋ 公式note肉料理21品 ＋ 麺料理11品（計36品）' },
       { label: 'AIアシスタント', value: '完全削除（シンプル軽量化）' },
       { label: '3D料理ビューアー', value: '360° ターンテーブル動画連動（全方位ドラッグ回転・ズーム）' },
-      { label: '公式note記事連携', value: '割烹食堂かいねのこだわり（全文リンク）' },
+      { label: '公式note記事連携', value: 'こだわり・低温火入の肉料理・麺料理（全3記事連携）' },
       { label: 'こだわり5大方針', value: '海の音色・一期一会・自家製調味料・至高の火入れ・おもてなし' },
       { label: 'メインビジュアル', value: '割烹食堂かいね 実際のお料理写真4選' },
       { label: '写真掲載方針', value: '仮画像を完全排除し、実物写真のみで構成' },

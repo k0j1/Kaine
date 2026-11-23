@@ -128,4 +128,47 @@ export class AppTheme {
       ornament: 'w-12 h-0.5 bg-[#c5a059] mx-auto mb-8'
     };
   }
+
+  /**
+   * ギャラリー用フィルタータブ（ピル型を使わない和モダン矩形タブ）のスタイルクラスを返すOOPヘルパー
+   */
+  public static getFilterTabClass(isActive: boolean): string {
+    const base = `px-4 py-2 ${this.rounded.sm} text-xs md:text-sm font-serif whitespace-nowrap shrink-0 transition-all duration-200 border`;
+    return isActive
+      ? `${base} bg-[#1a1a1a] text-white border-[#1a1a1a] font-bold ${this.shadows.sm}`
+      : `${base} bg-[#fafaf7] text-[#4b5563] border-[#e7e5e4] hover:border-[#c5a059] hover:text-[#1a1a1a]`;
+  }
+
+  /**
+   * サブカテゴリフィルター用のアンダーラインタブクラスを返すOOPヘルパー
+   */
+  public static getSubFilterTabClass(isActive: boolean): string {
+    const base = 'px-3 py-1.5 text-xs font-serif whitespace-nowrap shrink-0 transition-colors border-b-2';
+    return isActive
+      ? `${base} text-[#1a1a1a] border-[#c5a059] font-bold`
+      : `${base} text-[#6b7280] border-transparent hover:text-[#1a1a1a]`;
+  }
+
+  /**
+   * 料理カードのコンテナおよびセクションクラスを返すOOPヘルパー
+   */
+  public static getDishCardClasses(): {
+    container: string;
+    imageWrapper: string;
+    body: string;
+    title: string;
+    description: string;
+    footer: string;
+    fallbackContainer: string;
+  } {
+    return {
+      container: `group relative bg-white ${this.rounded.sm} border border-[#e7e5e4] overflow-hidden cursor-pointer ${this.shadows.card} hover:${this.shadows.cardHover} transition-all duration-300 flex flex-col`,
+      imageWrapper: 'relative aspect-[4/3] w-full overflow-hidden bg-[#f0f0eb]',
+      body: 'p-5 flex-1 flex flex-col justify-between bg-white',
+      title: 'font-serif font-bold text-base md:text-lg text-[#1a1a1a] group-hover:text-[#2c3e50] transition-colors mb-2 leading-snug',
+      description: 'text-xs font-serif text-[#6b7280] leading-relaxed mb-4 line-clamp-3',
+      footer: 'pt-3 border-t border-[#f0f0eb] flex items-center justify-between text-xs font-serif gap-2',
+      fallbackContainer: 'w-full h-full flex flex-col items-center justify-center bg-[#f5f5f0] text-[#6b7280] p-6 text-center'
+    };
+  }
 }

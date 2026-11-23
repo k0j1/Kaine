@@ -27,8 +27,16 @@ export class PhotoItemModel {
     return this._data.category;
   }
 
+  public get subCategory(): string | undefined {
+    return this._data.subCategory;
+  }
+
   public get imageUrl(): string {
     return this._data.imageUrl;
+  }
+
+  public get altImageUrl(): string | undefined {
+    return this._data.altImageUrl;
   }
 
   public get thumbnailUrl(): string {
@@ -49,6 +57,14 @@ export class PhotoItemModel {
 
   public get authorName(): string {
     return this._data.authorName || '割烹食堂かいね 実際のお料理';
+  }
+
+  public get sourceArticleUrl(): string | undefined {
+    return this._data.sourceArticleUrl;
+  }
+
+  public get sourceArticleTitle(): string | undefined {
+    return this._data.sourceArticleTitle;
   }
 
   public get rating(): number {
@@ -80,6 +96,8 @@ export class PhotoItemModel {
     return (
       this._data.title.toLowerCase().includes(lower) ||
       this._data.description.toLowerCase().includes(lower) ||
+      (this._data.subCategory ? this._data.subCategory.toLowerCase().includes(lower) : false) ||
+      (this._data.sourceArticleTitle ? this._data.sourceArticleTitle.toLowerCase().includes(lower) : false) ||
       this._data.tags.some(tag => tag.toLowerCase().includes(lower))
     );
   }
@@ -109,7 +127,15 @@ export class GalleryService {
    */
   private initializePhotos(): void {
     try {
-      this.photos = PLACE_PHOTOS.map(p => new PhotoItemModel(p));
+      const validPhotos: PhotoItemModel[] = [];
+      for (const item of PLACE_PHOTOS) {
+        try {
+          validPhotos.push(new PhotoItemModel(item));
+        } catch (itemErr) {
+          console.warn('不正な写真データをスキップしました:', itemErr);
+        }
+      }
+      this.photos = validPhotos;
     } catch (err) {
       console.error('ギャラリー写真の初期化中にエラーが発生しました:', err);
       // エラー発生時もクラッシュさせず、最低限のフォールバックモデルを保持
@@ -125,18 +151,80 @@ export class GalleryService {
   }
 
   /**
-   * カテゴリと検索クエリによるフィルタリング
+   * カテゴリとサブカテゴリ、検索クエリによるフィルタリング
    */
-  public filterPhotos(category: PlacePhotoCategory, query: string = ''): PhotoItemModel[] {
+  public filterPhotos(
+    category: PlacePhotoCategory,
+    query: string = '',
+    subCategory: string = 'ALL'
+  ): PhotoItemModel[] {
     try {
       return this.photos.filter(photo => {
         const matchesCategory = category === PlacePhotoCategory.ALL || photo.category === category;
+        const matchesSub = subCategory === 'ALL' || photo.subCategory === subCategory;
         const matchesSearch = photo.matchesQuery(query);
-        return matchesCategory && matchesSearch;
+        return matchesCategory && matchesSub && matchesSearch;
       });
     } catch (err) {
       console.error('写真フィルタリング処理中にエラーが発生しました:', err);
-      return this.photos;
+      return [...this.photos];
+    }
+  }
+
+  /**
+   * 実際に写真が存在するカテゴリ一覧の取得
+   */
+  public getAvailableCategories(): PlacePhotoCategory[] {
+    try {
+      const present = new Set<PlacePhotoCategory>();
+      this.photos.forEach(p => present.add(p.category));
+      const ordered = [
+        PlacePhotoCategory.ALL,
+        PlacePhotoCategory.MEAT_LOWTEMP,
+        PlacePhotoCategory.NOODLES,
+        PlacePhotoCategory.SEAFOOD,
+        PlacePhotoCategory.SEASONAL,
+        PlacePhotoCategory.SIGNATURE,
+        PlacePhotoCategory.ALACARTE,
+        PlacePhotoCategory.SAKE,
+        PlacePhotoCategory.INTERIOR
+      ];
+      return ordered.filter(cat => cat === PlacePhotoCategory.ALL || present.has(cat));
+    } catch (err) {
+      console.error('利用可能カテゴリの取得に失敗しました:', err);
+      return [PlacePhotoCategory.ALL];
+    }
+  }
+
+  /**
+   * 指定カテゴリ内のサブカテゴリ一覧を取得
+   */
+  public getSubCategories(category: PlacePhotoCategory): string[] {
+    try {
+      if (category === PlacePhotoCategory.ALL) return [];
+      const set = new Set<string>();
+      this.photos.forEach(p => {
+        if (p.category === category && p.subCategory) {
+          set.add(p.subCategory);
+        }
+      });
+      return Array.from(set);
+    } catch (err) {
+      console.error('サブカテゴリ一覧の取得に失敗しました:', err);
+      return [];
+    }
+  }
+
+  /**
+   * カテゴリごとの件数取得
+   */
+  public getCategoryCount(category: PlacePhotoCategory): number {
+    try {
+      if (category === PlacePhotoCategory.ALL) return this.photos.length;
+      return this.photos.filter(p => p.category === category).length;
+    } catch (err) {
+      console.error('カテゴリ件数の取得に失敗しました:', err);
+      return 0;
     }
   }
 
@@ -159,7 +247,11 @@ export class GalleryService {
       case PlacePhotoCategory.SEAFOOD:
         return '旬の海鮮・刺身';
       case PlacePhotoCategory.SEASONAL:
-        return '季節の土鍋・逸品';
+        return '季節の土鍋・椀物';
+      case PlacePhotoCategory.MEAT_LOWTEMP:
+        return '低温火入の肉料理';
+      case PlacePhotoCategory.NOODLES:
+        return '特製 麺料理';
       case PlacePhotoCategory.ALACARTE:
         return '割烹一品・酒菜';
       case PlacePhotoCategory.SAKE:

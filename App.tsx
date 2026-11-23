@@ -7,7 +7,6 @@ import MenuSection from './components/MenuSection';
 import Gallery from './components/Gallery';
 import AccessSection from './components/AccessSection';
 import InfoSection from './components/InfoSection';
-import InstagramFeed from './components/InstagramFeed';
 import MediaSection from './components/MediaSection';
 import { LightpaperModal } from './components/LightpaperModal';
 import { Dish3DModal } from './components/Dish3DModal';
@@ -66,7 +65,6 @@ const App: React.FC = () => {
         <Gallery />
         <MediaSection />
         <AccessSection />
-        <InstagramFeed />
         <InfoSection />
       </main>
       

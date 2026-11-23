@@ -1,13 +1,9 @@
 
 import React, { useState } from 'react';
-import { MENU_DATA, MENU_SCANS } from '../constants';
+import { MENU_DATA } from '../constants';
 import { MenuCategory, MenuSectionData } from '../types';
 
-interface MenuSectionProps {
-  images?: string[];
-}
-
-const MenuSection: React.FC<MenuSectionProps> = ({ images }) => {
+const MenuSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<MenuCategory>(MenuCategory.LUNCH);
 
   const activeData: MenuSectionData | undefined = MENU_DATA.find(d => d.category === activeCategory);
@@ -79,30 +75,21 @@ const MenuSection: React.FC<MenuSectionProps> = ({ images }) => {
             <p className="text-xs text-gray-400">※価格は全て税込です。仕入れ状況により内容が変更となる場合がございます。</p>
         </div>
 
-        {/* Menu Photos Section */}
-        <div className="mt-24 pt-12 border-t border-gray-100">
-            <h3 className="text-center font-serif text-xl mb-8 text-gray-600">メニュー写真</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {/* API画像がある場合はそれを表示、なければスキャン画像を表示 */}
-               {(images && images.length > 0 ? images.slice(0, 3) : MENU_SCANS).map((imgOrSrc, idx) => {
-                 const src = typeof imgOrSrc === 'string' ? imgOrSrc : imgOrSrc.src;
-                 const alt = typeof imgOrSrc === 'string' ? 'Menu Photo' : imgOrSrc.alt;
-                 return (
-                    <div key={idx} className="bg-white p-2 shadow-lg rounded-sm border border-stone-200 group cursor-pointer">
-                        <div className="aspect-[3/4] relative overflow-hidden bg-stone-100">
-                        <img 
-                            src={src} 
-                            alt={alt} 
-                            className="w-full h-full object-contain md:object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            {alt}
-                        </div>
-                        </div>
-                    </div>
-                 );
-               })}
-            </div>
+        {/* 公式note料理アーカイブ案内 */}
+        <div className="mt-10 bg-[#fafaf7] border border-[#e7e5e4] rounded-sm p-6 text-center">
+          <p className="text-xs font-serif text-[#c5a059] tracking-widest uppercase mb-1">Special Archives from Official note</p>
+          <h3 className="font-serif font-bold text-base md:text-lg text-[#1a1a1a] mb-2">
+            低温火入の肉料理（21品）＆ 特製 麺料理（11品）
+          </h3>
+          <p className="text-xs font-serif text-[#4b5563] leading-relaxed mb-4 max-w-xl mx-auto">
+            定番のお品書きに加え、公式noteで紹介している季節・仕入れ限定を含む低温調理の肉料理や特製麺料理の全32品を写真・解説付きで下のギャラリーに掲載しております。
+          </p>
+          <a
+            href="#gallery"
+            className="inline-flex items-center justify-center px-6 py-2.5 bg-[#2c3e50] hover:bg-[#1a1a1a] text-white text-xs md:text-sm font-serif rounded-sm transition-colors"
+          >
+            お料理ギャラリーで全品を見る ↓
+          </a>
         </div>
 
       </div>
