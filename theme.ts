@@ -171,4 +171,58 @@ export class AppTheme {
       fallbackContainer: 'w-full h-full flex flex-col items-center justify-center bg-[#f5f5f0] text-[#6b7280] p-6 text-center'
     };
   }
+
+  /**
+   * レスポンシブカルーセル（スマホ重なり防止・タッチスワイプ対応）用のスタイルクラスを返すOOPヘルパー
+   */
+  public static getCarouselClasses(): {
+    sectionWrapper: string;
+    stageContainer: string;
+    viewport: string;
+    track: string;
+    slideWrapper: string;
+    controlBar: string;
+    navGroup: string;
+    iconButton: string;
+    counterText: string;
+    progressTrack: string;
+    progressFill: string;
+    thumbnailRail: string;
+    thumbnailButton: (isActive: boolean) => string;
+    helperNote: string;
+    categoryBadge: string;
+    categoryBadgeIcon: string;
+    priceBadge: string;
+    tagLine: string;
+    authorLabel: string;
+    detailHint: string;
+  } {
+    return {
+      sectionWrapper: 'my-6 md:my-10',
+      stageContainer: `relative bg-[#fafaf7] border border-[#e7e5e4] ${this.rounded.sm} p-3 sm:p-5 md:p-6 ${this.shadows.sm}`,
+      viewport: 'overflow-hidden w-full touch-pan-y select-none',
+      track: 'flex transition-transform duration-300 ease-out',
+      slideWrapper: 'shrink-0 px-1 sm:px-2.5 box-border',
+      controlBar: 'mt-5 pt-4 border-t border-[#e7e5e4] flex flex-wrap items-center justify-between gap-3',
+      navGroup: 'flex items-center gap-2',
+      iconButton: `min-w-[44px] min-h-[44px] inline-flex items-center justify-center bg-white border border-[#d6d3d1] text-[#1a1a1a] hover:border-[#c5a059] hover:text-[#2c3e50] active:scale-95 transition-all ${this.rounded.sm} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] disabled:opacity-40 disabled:pointer-events-none`,
+      counterText: 'text-xs sm:text-sm font-serif font-bold text-[#1a1a1a] tabular-nums min-w-[68px] text-center whitespace-nowrap',
+      progressTrack: 'flex-1 min-w-[90px] h-1.5 bg-[#e7e5e4] rounded-full overflow-hidden hidden sm:block',
+      progressFill: 'h-full bg-[#c5a059] transition-all duration-300',
+      thumbnailRail: 'mt-4 flex items-center gap-2.5 overflow-x-auto pb-1 snap-x snap-mandatory',
+      thumbnailButton: (isActive: boolean) =>
+        `relative w-16 h-12 sm:w-20 sm:h-14 shrink-0 snap-start ${this.rounded.sm} overflow-hidden border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] ${
+          isActive
+            ? 'border-[#c5a059] opacity-100 shadow-sm'
+            : 'border-[#e7e5e4] opacity-60 hover:opacity-100'
+        }`,
+      helperNote: 'mt-3 text-center text-[11px] sm:text-xs font-serif text-[#6b7280]',
+      categoryBadge: `absolute top-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[11px] px-2.5 py-1 ${this.rounded.sm} flex items-center gap-1 border border-white/10 font-serif max-w-[60%] truncate`,
+      categoryBadgeIcon: 'text-[#c5a059] shrink-0',
+      priceBadge: `absolute top-3 right-3 bg-[#2c3e50]/90 backdrop-blur-sm text-white text-[11px] px-2.5 py-1 ${this.rounded.sm} font-serif font-bold whitespace-nowrap`,
+      tagLine: 'text-[11px] font-serif text-[#9e7e3e] mb-3 truncate',
+      authorLabel: 'text-[#c5a059] font-medium truncate',
+      detailHint: 'inline-flex items-center gap-1 text-[#2c3e50] font-semibold shrink-0'
+    };
+  }
 }

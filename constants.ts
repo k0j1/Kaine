@@ -1,7 +1,7 @@
 
 import { MenuCategory, MenuSectionData, MediaLink, PlacePhoto, PlacePhotoCategory, LightpaperSection, CommitmentPillar } from './types';
 
-export const APP_VERSION = "1.0.12";
+export const APP_VERSION = "1.0.13";
 export const SITE_NAME = "割烹食堂かいね";
 export const SITE_SUBTITLE = "Kappo Shokudo Kaine";
 
@@ -1262,6 +1262,7 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
     title: 'デジタル体験仕様・アップデート履歴',
     subtitle: 'WebサイトおよびFarcaster Mini App連携の技術仕様',
     content: [
+      '【v1.0.13 アップデート】お料理ギャラリーのカルーセルを全面刷新。従来の3Dリング表示によるスマートフォン画面での写真重なり・はみ出しを解消し、スマホでは1枚ずつ、タブレット2枚、PC3枚の重なりゼロ・水平スワイプ対応カルーセル（サムネイル早見バー、自動再生切替、タップ拡大詳細連携付き）へ改善しました。',
       '【v1.0.12 アップデート】公式note「お刺身（https://note.com/firm_emu2667/n/na6fd74ed8939）」より、お刺身盛り合わせ・本鮪カマトロ・鰆炙り刺し・活伊佐木焼霜造り・鰹藁焼き＆たたき・真魚鰹薄造り・北海道産秋刀魚・特製〆鯖・細魚・低温火入サーモン・目光炙り刺し・穴子焼霜造り・赤なまこ・活鮑・仙鳳趾ミルク牡蠣・生桜海老＆白海老・季節野菜のお造り・二本松産竹の子・真菰竹・会津産馬刺し（赤身/たてがみ2種）の全24品を追加しました。',
       '【v1.0.11 アップデート】3D 360°で料理を見る機能および関連する料理動画を削除し、高精細な実物お料理写真と公式note特集料理の閲覧に最適化したシンプル・軽量構成としました。',
       '【v1.0.10 アップデート】公式note「定番ランチメニュー（https://note.com/firm_emu2667/n/n6fd871f52b1f）」より、「鶏かつ定食（150g）」「鶏かつW定食（300g）」「レバカツ定食」「お刺身定食」「海鮮バラちらし」の全5品を定番ランチ・名物定食カテゴリへ追加し、実物写真（お刺身定食の2アングル対応含む）と調理解説・記事リンクを統合しました。',
@@ -1275,7 +1276,7 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
       '【v1.0.1 アップデート】Farcaster Mini Apps SDK初期化処理（sdk.actions.ready）、単一グローバルテーマ（AppTheme）統制、OOPデータモデル（PhotoItemModel / GalleryService）の導入。'
     ],
     specs: [
-      { label: '現在バージョン', value: 'v1.0.12' },
+      { label: '現在バージョン', value: 'v1.0.13' },
       { label: '掲載料理点数', value: '実写特選4品 ＋ 定番ランチ5品 ＋ お刺身・山海の幸24品 ＋ 肉料理21品 ＋ 麺料理11品（計65品）' },
       { label: 'AIアシスタント', value: '完全削除（シンプル軽量化）' },
       { label: '公式note記事連携', value: 'こだわり・定番ランチ・お刺身・低温火入の肉料理・麺料理（全5記事連携）' },

@@ -255,3 +255,72 @@ export class GalleryService {
     }
   }
 }
+
+/**
+ * カルーセルのレスポンシブ表示制御・インデックス計算を担うOOPクラス
+ * スマホ表示での写真重なりを防ぐため、画面幅に応じた安全な表示枚数と移動範囲を計算します。
+ */
+export class CarouselNavigator {
+  /**
+   * 画面幅に応じた1画面あたりのスライド表示枚数を返却
+   */
+  public static getItemsPerView(viewportWidth: number): number {
+    try {
+      if (!Number.isFinite(viewportWidth) || viewportWidth < 640) {
+        return 1; // スマホ（<640px）は1枚ずつ表示し重なりを完全に防止
+      }
+      if (viewportWidth < 1024) {
+        return 2; // タブレット（640px〜1023px）は2枚並べて表示
+      }
+      return 3; // デスクトップ（>=1024px）は3枚並べて表示
+    } catch (err) {
+      console.warn('カルーセル表示枚数の算出に失敗しました:', err);
+      return 1;
+    }
+  }
+
+  /**
+   * 開始インデックスの安全な最大値を計算
+   */
+  public static getMaxStartIndex(totalItems: number, itemsPerView: number): number {
+    if (totalItems <= 0 || itemsPerView <= 0) return 0;
+    return Math.max(0, totalItems - itemsPerView);
+  }
+
+  /**
+   * 現在のインデックスを安全な範囲 [0, maxStartIndex] に丸める
+   */
+  public static clampIndex(index: number, totalItems: number, itemsPerView: number): number {
+    const maxStart = this.getMaxStartIndex(totalItems, itemsPerView);
+    if (!Number.isFinite(index) || index < 0) return 0;
+    return Math.min(index, maxStart);
+  }
+
+  /**
+   * 次のスライドインデックスを計算（末尾到達時は先頭へループ）
+   */
+  public static getNextIndex(currentIndex: number, totalItems: number, itemsPerView: number): number {
+    const maxStart = this.getMaxStartIndex(totalItems, itemsPerView);
+    if (maxStart === 0) return 0;
+    return currentIndex >= maxStart ? 0 : currentIndex + 1;
+  }
+
+  /**
+   * 前のスライドインデックスを計算（先頭時は末尾へループ）
+   */
+  public static getPrevIndex(currentIndex: number, totalItems: number, itemsPerView: number): number {
+    const maxStart = this.getMaxStartIndex(totalItems, itemsPerView);
+    if (maxStart === 0) return 0;
+    return currentIndex <= 0 ? maxStart : currentIndex - 1;
+  }
+
+  /**
+   * 現在の進捗率（0〜100%）を計算
+   */
+  public static getProgressPercent(currentIndex: number, totalItems: number, itemsPerView: number): number {
+    if (totalItems <= 0) return 0;
+    const maxStart = this.getMaxStartIndex(totalItems, itemsPerView);
+    if (maxStart === 0) return 100;
+    return Math.min(100, Math.max(0, ((currentIndex + itemsPerView) / totalItems) * 100));
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   LayoutGrid,
   Sparkles,
@@ -12,8 +12,9 @@ import {
 } from 'lucide-react';
 import { GalleryService, PhotoItemModel } from '../services/galleryService';
 import { PlacePhotoCategory } from '../types';
-import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL, NOTE_SASHIMI_ARTICLE_URL } from '../constants';
+import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL, NOTE_SASHIMI_ARTICLE_URL, GOOGLE_MAPS_LOCATION_URL } from '../constants';
 import { PhotoModal } from './PhotoModal';
+import { GalleryCarousel } from './GalleryCarousel';
 import { ResilientImage } from './ResilientImage';
 import { AppTheme } from '../theme';
 
@@ -41,11 +42,6 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
 
   // 拡大表示用モーダルステート
   const [activePhoto, setActivePhoto] = useState<PhotoItemModel | null>(null);
-
-  // 3Dカルーセル用の回転ステート
-  const [rotation, setRotation] = useState(0);
-  const autoRotateRef = useRef<number>(0);
-  const isHoveringRef = useRef(false);
 
   // ギャラリーサービス（OOP Singleton）
   const galleryService = useMemo(() => GalleryService.getInstance(), []);
@@ -81,46 +77,33 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
     setSelectedSubCategory('ALL');
   };
 
-  // 3Dカルーセル用の画像リスト（リング上の重なりを防ぐため代表10品に最適化）
-  const carouselDisplayItems = useMemo(() => {
+  // カルーセル表示用のPhotoItemModel配列（スマホでも重なりなく全品閲覧可能）
+  const carouselPhotos = useMemo<PhotoItemModel[]>(() => {
     if (apiImages && apiImages.length > 0) {
-      return apiImages.slice(0, 10).map((src, index) => ({
-        id: `api-${index}`,
-        src,
-        title: '割烹食堂かいね お料理',
-        price: ''
-      }));
+      const customModels: PhotoItemModel[] = [];
+      apiImages.forEach((src, index) => {
+        try {
+          customModels.push(
+            new PhotoItemModel({
+              id: `api-${index}`,
+              title: '割烹食堂かいね お料理',
+              category: PlacePhotoCategory.SIGNATURE,
+              imageUrl: src,
+              thumbnailUrl: src,
+              description: '割烹食堂かいねの季節のお料理写真です。',
+              googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+              authorName: '割烹食堂かいね',
+              tags: ['割烹食堂かいね']
+            })
+          );
+        } catch (err) {
+          console.warn('API画像のモデル生成をスキップしました:', err);
+        }
+      });
+      return customModels;
     }
-    const sourceList = filteredPhotos.length > 0 ? filteredPhotos : galleryService.getAllPhotos();
-    return sourceList.slice(0, 10).map(photo => ({
-      id: photo.id,
-      src: photo.imageUrl,
-      title: photo.title,
-      price: photo.price || ''
-    }));
-  }, [apiImages, filteredPhotos, galleryService]);
-
-  // 画像枚数に合わせて角度を調整
-  const numberOfImages = Math.max(carouselDisplayItems.length, 1);
-  const anglePerImage = 360 / numberOfImages;
-  const radius = 320; // 中心からの距離
-
-  // 3D回転アニメーションループ
-  useEffect(() => {
-    if (viewMode !== 'carousel3d') return;
-
-    const animate = () => {
-      if (!isHoveringRef.current) {
-        setRotation(prev => prev - 0.2); // 時計回りにゆっくり回転
-      }
-      autoRotateRef.current = requestAnimationFrame(animate);
-    };
-    autoRotateRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (autoRotateRef.current) cancelAnimationFrame(autoRotateRef.current);
-    };
-  }, [viewMode]);
+    return filteredPhotos;
+  }, [apiImages, filteredPhotos]);
 
   const headerClass = AppTheme.getSectionHeaderClass();
   const cardClasses = AppTheme.getDishCardClasses();
@@ -221,7 +204,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
                   ? 'bg-white text-[#2c3e50] shadow-xs font-bold'
                   : 'text-[#6b7280] hover:text-[#1a1a1a]'
               }`}
-              title="回転カルーセル表示"
+              title="カルーセル表示"
             >
               <Layers size={14} />
               <span>カルーセル</span>
@@ -462,70 +445,31 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
           </>
         )}
 
-        {/* 2. 和モダンカルーセル表示 */}
+        {/* 2. 和モダンカルーセル表示（スマホ重なり解消・タッチスワイプ対応） */}
         {viewMode === 'carousel3d' && (
-          <div className="my-10">
-            <div
-              className="relative h-[480px] md:h-[540px] flex items-center justify-center perspective-1000"
-              onMouseEnter={() => isHoveringRef.current = true}
-              onMouseLeave={() => isHoveringRef.current = false}
-            >
-              <div
-                className="relative w-[290px] md:w-[340px] h-[220px] md:h-[250px] preserve-3d transition-transform duration-100"
-                style={{ transform: `rotateY(${rotation}deg)` }}
-              >
-                {carouselDisplayItems.map((img, index) => {
-                  const angle = index * anglePerImage;
-                  return (
-                    <div
-                      key={img.id}
-                      className="absolute top-0 left-0 w-full h-full"
-                      style={{
-                        transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
-                        backfaceVisibility: 'hidden'
-                      }}
-                    >
-                      {/* 3Dカード */}
-                      <div className="relative w-full h-full group transform-style-3d cursor-pointer">
-                        <div className={`absolute inset-0 bg-white p-2 shadow-xl border border-[#e7e5e4] ${AppTheme.rounded.sm}`}>
-                          <div className="w-full h-full overflow-hidden relative">
-                            <ResilientImage
-                              src={img.src}
-                              alt={img.title}
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                              <span className="text-white font-serif text-sm font-bold">{img.title}</span>
-                              {img.price && (
-                                <span className="text-[#e6c887] text-xs font-serif mt-1">{img.price}</span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* 反射効果 */}
-                        <div
-                          className="absolute -bottom-[230px] left-0 w-full h-full opacity-20 transform scale-y-[-1] pointer-events-none"
-                          style={{
-                            backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.7), white), url(${img.src})`,
-                            backgroundSize: 'cover',
-                            maskImage: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)'
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="text-center mt-4">
-              <span className="text-xs text-[#9ca3af] block mb-1">※マウスを乗せると回転が停止します</span>
-              <p className="font-serif text-[#4b5563] text-sm leading-relaxed">
-                目で楽しみ、舌で味わう。割烹食堂かいねのお料理が巡ります。
+          carouselPhotos.length === 0 ? (
+            <div className={`py-16 text-center bg-[#fafaf7] border border-[#e7e5e4] ${AppTheme.rounded.sm} mb-14`}>
+              <p className="font-serif text-sm text-[#4b5563] mb-4">
+                該当するお料理が見つかりませんでした。
               </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory(PlacePhotoCategory.ALL);
+                  setSelectedSubCategory('ALL');
+                  setSearchQuery('');
+                }}
+                className={AppTheme.getButtonClass('outline')}
+              >
+                絞り込みをリセットする
+              </button>
             </div>
-          </div>
+          ) : (
+            <GalleryCarousel
+              photos={carouselPhotos}
+              onSelectPhoto={(p) => setActivePhoto(p)}
+              isPausedExternal={Boolean(activePhoto)}
+            />
+          )
         )}
 
         {/* かいね自慢の看板料理ピックアップ */}
@@ -577,23 +521,10 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
       {/* 料理写真拡大・詳細モーダル */}
       <PhotoModal
         photo={activePhoto}
-        allPhotos={filteredPhotos}
+        allPhotos={carouselPhotos.length > 0 ? carouselPhotos : filteredPhotos}
         onClose={() => setActivePhoto(null)}
         onSelectPhoto={(p) => setActivePhoto(p)}
       />
-
-      {/* カルーセル用CSS */}
-      <style>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .transform-style-3d {
-          transform-style: preserve-3d;
-        }
-      `}</style>
     </section>
   );
 };
