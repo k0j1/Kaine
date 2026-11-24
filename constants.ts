@@ -1,7 +1,7 @@
 
 import { MenuCategory, MenuSectionData, MediaLink, PlacePhoto, PlacePhotoCategory, LightpaperSection, CommitmentPillar } from './types';
 
-export const APP_VERSION = "1.0.11";
+export const APP_VERSION = "1.0.12";
 export const SITE_NAME = "割烹食堂かいね";
 export const SITE_SUBTITLE = "Kappo Shokudo Kaine";
 
@@ -13,6 +13,8 @@ export const RESERVATION_URL = "https://www.instagram.com/kaine_cuisine/";
 export const NOTE_ARTICLE_URL = "https://note.com/firm_emu2667/n/nf27eed0b29ce";
 // 公式note記事リンク（定番ランチメニュー・全5品）
 export const NOTE_LUNCH_ARTICLE_URL = "https://note.com/firm_emu2667/n/n6fd871f52b1f";
+// 公式note記事リンク（お刺身・海の幸・山の幸・全24品）
+export const NOTE_SASHIMI_ARTICLE_URL = "https://note.com/firm_emu2667/n/na6fd74ed8939";
 // 公式note記事リンク（低温火入の肉料理・全21品）
 export const NOTE_MEAT_ARTICLE_URL = "https://note.com/firm_emu2667/n/n2f10b059166f";
 // 公式note記事リンク（麺料理・全11品）
@@ -212,6 +214,14 @@ export const MEDIA_LINKS: MediaLink[] = [
     tags: ['和食屋の麺料理', '本格出汁', '蕎麦・うどん・冷麺', '全11品掲載']
   },
   {
+    id: 'note-sashimi',
+    siteName: '公式 note「お刺身・旬の海と山の幸」',
+    description: 'お刺身盛り合わせ、本鮪カマトロ、活伊佐木焼霜造り（白子醤油）、藁焼き鰹、低温火入サーモン、活鮑、仙鳳趾ミルク牡蠣、生桜海老・白海老、会津産馬刺しなど全24品の珠玉の一皿。',
+    url: NOTE_SASHIMI_ARTICLE_URL,
+    image: 'https://assets.st-note.com/img/1795490127-69pYkW5SIleM38ALPfXzaKqJ.png',
+    tags: ['お刺身盛り合わせ', '活魚・貝類', '生海老', '会津馬刺し・山菜']
+  },
+  {
     id: 'instagram',
     siteName: '公式 Instagram',
     description: '店主が更新する公式インスタグラム。その日の日替わり定食や、入荷したばかりの旬の鮮魚・厳選日本酒の入荷情報をいち早くお届けします。日々の営業状況もご確認いただけます。',
@@ -254,6 +264,7 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     id: 'k1',
     title: '本鮪の贅沢炙り 海鮮丼仕立て',
     category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '特選お料理',
     imageUrl: 'assets/aistudio/Img_2025_04_12_12_59_49_104cbefa.jpeg',
     thumbnailUrl: 'assets/aistudio/Img_2025_04_12_12_59_49_104cbefa.jpeg',
     description: '市場直送の上質な本鮪を表面だけサッと炙り、たっぷりの青葱、香り高い刻み海苔、炒り胡麻をあしらった珠玉の一皿。香ばしさと極上の脂の甘みが口いっぱいに広がります。',
@@ -268,6 +279,7 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     id: 'k2',
     title: '旬魚のタタキ 香味ガーリック仕立て',
     category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '特選お料理',
     imageUrl: 'assets/aistudio/Img_2025_03_26_12_57_15_96449b80.jpeg',
     thumbnailUrl: 'assets/aistudio/Img_2025_03_26_12_57_15_96449b80.jpeg',
     description: '絶妙な火入れで香ばしく焼き締めた旬の鮮魚に、クリスピーなフライドガーリックとシャキシャキの香味野菜、特製出汁タレを合わせた極上の酒菜。',
@@ -296,6 +308,7 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     id: 'k4',
     title: '天然鮮魚と生アオサ海苔の彩り和え',
     category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '特選お料理',
     imageUrl: 'assets/aistudio/Img_2025_04_15_12_38_57_92f74187.jpeg',
     thumbnailUrl: 'assets/aistudio/Img_2025_04_15_12_38_57_92f74187.jpeg',
     description: '豊かな海の香りを纏う生アオサ海苔と、プリプリの天然白身魚、青葱、金胡麻を特製合わせ出汁で仕立てた海鮮小鉢。鮮やかな緑と魚の旨味が調和します。',
@@ -858,6 +871,355 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     sourceArticleTitle: '【割烹食堂かいね】定番ランチメニュー',
     featured: true,
     tags: ['海鮮バラちらし寿司', 'ざらめ', '特製寿司酢', 'ヅケ海鮮']
+  },
+  // =========================================================================
+  // 公式note「【割烹食堂かいね】お刺身」全24品
+  // https://note.com/firm_emu2667/n/na6fd74ed8939
+  // =========================================================================
+  // --- 海の幸（鮮魚） (15品) ---
+  {
+    id: 'note-sashimi-1',
+    title: 'お刺身盛り合わせ（夜の看板メニュー・5〜6種）',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795490127-69pYkW5SIleM38ALPfXzaKqJ.png',
+    altImageUrl: 'https://assets.st-note.com/img/1795489592-qrtzysWgKGYMfV3BdavwUhP4.png',
+    description: '新鮮な旬の鮮魚や白身、貝類などを盛り込んだ当店自慢のお刺身盛り合わせ。季節やその日の仕入れごとに魚種が変わり、一期一会の旬の味覚をお楽しみいただけます。（例：千葉県産鮪中トロ、宮崎県産勘八、青森県産本鱒、岩手県産平目、青森県産あおり烏賊）',
+    price: '夜の看板メニュー',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    featured: true,
+    tags: ['お刺身盛り合わせ', '千葉県産鮪中トロ', '宮崎県産勘八', '青森県産あおり烏賊']
+  },
+  {
+    id: 'note-sashimi-2',
+    title: 'お刺身盛り合わせ（春の旬鮮仕立て）',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1775692785-GREQOTIvYdM0omZ4FPc8e9S7.png',
+    description: '春の恵みを感じる旬魚を中心に、職人の包丁技と彩りで仕立てた季節のお刺身盛り合わせです。',
+    price: '旬のお造り盛り合わせ',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['春のお刺身', 'お刺身盛り合わせ', '季節の鮮魚']
+  },
+  {
+    id: 'note-sashimi-3',
+    title: '本鮪カマトロ',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1775645560-4tbWx3HlfczQkFKgByVvN9M0.png',
+    description: 'お刺身で提供できる本鮪のカマトロは、鮪1尾からわずか数百gしか取れない超希少価値の高い部位。脂乗り抜群で、まるで大トロのような濃厚な味わいをご堪能いただけます。',
+    price: '超希少部位',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    featured: true,
+    tags: ['本鮪カマトロ', '長崎県産', '刺身', '希少部位']
+  },
+  {
+    id: 'note-sashimi-4',
+    title: '鰆（さわら）炙り刺し',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795488740-P5H8ibzSy72oCplBwv1qNrhQ.png',
+    description: '淡泊ながら上品で甘みも感じられる福岡県産の鰆（さわら）。当店では皮目を香り高く炙ってご提供します。自家製の塩がより一層その甘みを引き立てます。',
+    price: '自家製塩でいただく炙り刺し',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['福岡県産', '鰆（さわら）', '炙り刺し', '自家製塩']
+  },
+  {
+    id: 'note-sashimi-5',
+    title: '活伊佐木（いさき）焼霜造り 〜白子醤油添え〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795488802-hSCky3PVHoWQ5x0bEFeT17fs.png',
+    description: '朝まで生きていた千葉県産の活伊佐木。皮目を炙る焼霜造りで皮下の一番旨味が強い部分を引き出し、酒煎りして裏ごしした濃厚でもっちりとした白子醤油（または肝醤油）を合わせてお召し上がりください。',
+    price: '活〆 焼霜造り',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['千葉県産', '活伊佐木', '焼霜造り', '白子醤油']
+  },
+  {
+    id: 'note-sashimi-6',
+    title: '高知県産 鰹（かつお）藁焼き',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795489036-zFVDCMhfbItUPoLH2ZOi1Jj4.png',
+    description: '藁焼きした鰹は芳醇な燻香をまとい味わい深い一皿に。新玉ねぎと香味野菜、にんにくスライス、特製ポン酢でお愉しみください。',
+    price: '名物 藁焼き',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['高知県産', '鰹（かつお）', '藁焼き', '香味野菜']
+  },
+  {
+    id: 'note-sashimi-7',
+    title: '鰹のたたき 〜特製トマトぽん酢〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795489329-vlgdVmZaEHrYn638CwxFbi2A.png',
+    description: '脂の乗った戻り鰹に強めにあら塩を振り、しっかりと炙って旨味を凝縮。たっぷりの薬味と特製トマトぽん酢をかけてご提供します。',
+    price: '特製トマトぽん酢',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['戻り鰹', '鰹たたき', '特製トマトぽん酢', 'あら塩炙り']
+  },
+  {
+    id: 'note-sashimi-8',
+    title: '真魚鰹（まながつお）薄造り',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795490923-YOmI73ypuUChjwxS8fnKrVDH.png',
+    description: '上品な白身で繊細な味わいの旬のマナガツオ。程よく脂が乗っており、薄造りにすることで口に入れるととろける食感とほんのりとした甘み、コクのある旨味が際立ちます。',
+    price: '旬の白身 薄造り',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['マナガツオ', '薄造り', '白身刺身']
+  },
+  {
+    id: 'note-sashimi-9',
+    title: '北海道産 秋刀魚（さんま）刺し 〜肝醤油添え〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795489035-OweY8F2g0jpfo1NP3SIVCRaW.png',
+    description: '秋刀魚の旨味を余すことなく堪能していただくため、お刺身には肝を練り込んだ特製肝醤油を添えてご提供いたします。ほんのりとした苦味と甘み、脂の溶け込んだ醤油が相性抜群です。',
+    price: '特製肝醤油添え',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['北海道産', '秋刀魚刺し', '肝醤油']
+  },
+  {
+    id: 'note-sashimi-10',
+    title: '特製 〆鯖（しめさば）',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795489035-6cm293EjPMgpaGy4uFiDHArV.png',
+    description: '当店の〆鯖は生により近い状態で仕上げるため口当たりが滑らかで、鯖本来の甘みをしっかり堪能できます。強塩の時間は極力短く、特製甘酢の塩味と酸味のバランスが鯖の脂と好相性。冷凍せず細やかな隠し包丁を入れることで安心・安全かつ極上の生食感をお届けします。',
+    price: '生食感 自家製〆鯖',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['自家製〆鯖', '特製甘酢', '隠し包丁']
+  },
+  {
+    id: 'note-sashimi-11',
+    title: '細魚（さより）姿造り',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795490567-sLrSZdBRD9XEMpzkAn68bNCH.png',
+    description: '冬から春にかけて旬を迎える「春を告げる魚」さより。上品で澄んだ甘みと旨みが感じられ、ほんのりと漂う余韻がアクセントになる繊細な姿造りです。',
+    price: '旬の姿造り',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['細魚（さより）', '姿造り', '春を告げる魚']
+  },
+  {
+    id: 'note-sashimi-12',
+    title: 'サーモン刺身 〜低温火入れ〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795489035-VoFwfLy4p8UDIe7OGghRQTKB.png',
+    description: 'アトランティックサーモンに低温火入れを施すことで味わいが格段に変化。「火の通った生」として口の中でほろりと崩れる、新感覚の食感をお楽しみいただけます。',
+    price: '低温火入 刺身',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['サーモン刺身', 'アトランティック', '低温火入']
+  },
+  {
+    id: 'note-sashimi-13',
+    title: '目光（めひかり）炙り刺し',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795490666-rSUaWstMuFOzBNoxQ4TK62mg.png',
+    altImageUrl: 'https://assets.st-note.com/img/1775690593-enIpZS3QPBrU1Yvucdksg9lE.png',
+    description: '新鮮なその日にしか味わうことのできない生目光のお刺身。皮目に細かく包丁を入れて炙ることで、表面に目光特有の極上の脂が溢れ出し、とろける口当たりと濃厚な旨味・甘みをご堪能いただけます。',
+    price: '鮮度抜群 炙り刺し',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['目光（めひかり）', '炙り刺し', '細工包丁']
+  },
+  {
+    id: 'note-sashimi-14',
+    title: '穴子（あなご）焼霜造り',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795488981-s5dGnASmoBhEpF30yq2LXw4U.png',
+    description: '湯引きしてから皮目をしっかり炙ってレアに近い状態で仕上げる穴子の焼霜造り。丁寧な骨切りを施しているため骨は気にならず、穴子本来の旨味と香味がしっかり味わえます。',
+    price: '湯引き・骨切り仕立て',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['穴子', '湯引き', '焼霜造り', '骨切り']
+  },
+  {
+    id: 'note-sashimi-15',
+    title: '赤なまこ 〜わさび醤油〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（鮮魚）',
+    imageUrl: 'https://assets.st-note.com/img/1795490329-5sorFqSyh3Q9fzg8kY0I1jx7.png',
+    description: '磯の香りとコリコリ食感が魅力の赤なまこ。茶ぶりすることで柔らかく、独特のクセを取り除き食べやすく仕立てております。香り高いわさび醤油にてご提供します。',
+    price: '茶ぶり仕立て',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['赤なまこ', '茶ぶり', 'わさび醤油']
+  },
+  // --- 海の幸（貝類） (2品) ---
+  {
+    id: 'note-sashimi-16',
+    title: '活鮑（あわび）刺し 〜肝醤油〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（貝類）',
+    imageUrl: 'https://assets.st-note.com/img/1775647681-PlicjvEMqCsfIJGtu4SKdBV7.png',
+    description: '大振りで活きの良い鮑（あわび）。コリコリの歯ごたえと豊かな旨味を、濃厚な味わいが魅力の特製肝醤油でご提供いたします。',
+    price: '活貝・肝醤油添え',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['活鮑刺し', '肝醤油', '大振り鮑']
+  },
+  {
+    id: 'note-sashimi-17',
+    title: '仙鳳趾産 ミルク牡蠣',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（貝類）',
+    imageUrl: 'https://assets.st-note.com/img/1795489401-thp1QzbE09enMaoj3q5f6LAx.png',
+    description: '北海道・仙鳳趾（せんぽうし）産の超濃厚・特大の牡蠣。その名の通り、まるでミルクのようにとろとろで濃厚な旨味とクリーミーな味わいが広がります。',
+    price: '仙鳳趾産 特大牡蠣',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['仙鳳趾産', 'ミルク牡蠣', '濃厚クリーミー']
+  },
+  // --- 海の幸（その他魚介類） (2品) ---
+  {
+    id: 'note-sashimi-18',
+    title: '駿河湾産 生桜海老 刺身',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（その他魚介類）',
+    imageUrl: 'https://assets.st-note.com/img/1775648799-CavKMZ8kJNTOduUmsQ5zStWD.png',
+    description: '静岡県駿河湾でのみ唯一水揚げされる生の桜海老。鮮度落ちが非常に早いため、良質な鮮度が保たれているうちでなければお刺身では味わえない格別の逸品です。',
+    price: '駿河湾産 希少生刺身',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['駿河湾産', '生桜海老', '刺身']
+  },
+  {
+    id: 'note-sashimi-19',
+    title: '富山産 生白海老刺し',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '海の幸（その他魚介類）',
+    imageUrl: 'https://assets.st-note.com/img/1775649241-FP9MZetk3iRNHo4vIxBb5wpE.png',
+    description: '別名「富山湾の宝石」と呼ばれ、限られた時期にのみ水揚げされる白海老。お刺身で食べられるのは極めて希少で、ねっとりとした上品な甘みと海老の旨味が濃厚に広がります。',
+    price: '富山湾の宝石',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['富山産', '生白海老刺し', '富山湾の宝石']
+  },
+  // --- 山の幸 (5品) ---
+  {
+    id: 'note-sashimi-20',
+    title: '季節の野菜のお造り',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '山の幸',
+    imageUrl: 'https://assets.st-note.com/img/1795490823-aDkbZxIGtnPhouCJYmfHvR13.png',
+    description: '水茄子、姫セロリ、モロッコインゲン、蛇腹胡瓜、らっきょう、ミニトマトなど旬の生野菜を彩りよく盛り込んださっぱりとした一皿。季節の塩と檸檬胡椒マヨを添えてお召し上がりください。（※中身は仕入れにより変わります）',
+    price: '季節の塩＆檸檬胡椒マヨ',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['水茄子', '姫セロリ', '季節の塩', '檸檬胡椒マヨ']
+  },
+  {
+    id: 'note-sashimi-21',
+    title: '二本松産 朝獲れ竹の子刺し 〜梅塩添え〜',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '山の幸',
+    imageUrl: 'https://assets.st-note.com/img/1795490755-INjXOS5yruidWVflBn2RH9zC.png',
+    altImageUrl: 'https://assets.st-note.com/img/1795488925-tacqUzVyEn0wmr9iTAvKPpSD.png',
+    description: 'アクの回っていない朝獲れの新鮮な二本松産竹の子。瑞々しく柔らかい穂先と小気味よい歯触りを、特製梅塩を添えたお刺身でお楽しみください。',
+    price: '二本松産 朝獲れ',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['二本松産', '朝獲れ竹の子', '竹の子刺し', '梅塩']
+  },
+  {
+    id: 'note-sashimi-22',
+    title: '真菰竹（マコモダケ）',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '山の幸',
+    imageUrl: 'https://assets.st-note.com/img/1777728549-W9lQk4vUs0tFy78AzZurTbBf.png',
+    description: '沼や川に自生するイネ科植物マコモの茎が肥大化した、別名「ハナガツミ」。真っ白い身はアクやクセがほとんどなく生食でもほのかな甘みと小気味よい食感があり、天ぷらにすると甘みが増してとうもろこしのような香りが口いっぱいに広がります。',
+    price: '旬の山菜・ハナガツミ',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['真菰竹', 'マコモタケ', 'ハナガツミ']
+  },
+  {
+    id: 'note-sashimi-23',
+    title: '会津産 馬刺し（赤身・特製林檎辛味噌添え）',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '山の幸',
+    imageUrl: 'https://assets.st-note.com/img/1795489743-9kztaRj1ED673pvBn4dwgQUP.png',
+    description: '福島・会津名産の極上馬赤身刺し。しっとりと柔らかな赤身の旨味に、林檎を加えて仕込んだ特製辛味噌を添えてご提供いたします。',
+    price: '会津産 馬赤身',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['会津産', '馬刺し', '林檎辛味噌']
+  },
+  {
+    id: 'note-sashimi-24',
+    title: '馬刺し2種盛り（赤身とたてがみ）',
+    category: PlacePhotoCategory.SEAFOOD,
+    subCategory: '山の幸',
+    imageUrl: 'https://assets.st-note.com/img/1795489862-2Oh9LapX8dNGJ6DQFK1RqwgY.png',
+    description: '定番の赤身と真っ白い「たてがみ」の贅沢な2種盛り合わせ。たてがみはコリコリとした食感と優しい甘み、クリーミーな味わいが魅力です。赤身と一緒に召し上がるのもおすすめです。',
+    price: '赤身＆たてがみ',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note お刺身特集',
+    sourceArticleUrl: NOTE_SASHIMI_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】お刺身',
+    tags: ['馬刺し', '赤身', 'たてがみ', '2種盛り']
   }
 ];
 
@@ -900,6 +1262,7 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
     title: 'デジタル体験仕様・アップデート履歴',
     subtitle: 'WebサイトおよびFarcaster Mini App連携の技術仕様',
     content: [
+      '【v1.0.12 アップデート】公式note「お刺身（https://note.com/firm_emu2667/n/na6fd74ed8939）」より、お刺身盛り合わせ・本鮪カマトロ・鰆炙り刺し・活伊佐木焼霜造り・鰹藁焼き＆たたき・真魚鰹薄造り・北海道産秋刀魚・特製〆鯖・細魚・低温火入サーモン・目光炙り刺し・穴子焼霜造り・赤なまこ・活鮑・仙鳳趾ミルク牡蠣・生桜海老＆白海老・季節野菜のお造り・二本松産竹の子・真菰竹・会津産馬刺し（赤身/たてがみ2種）の全24品を追加しました。',
       '【v1.0.11 アップデート】3D 360°で料理を見る機能および関連する料理動画を削除し、高精細な実物お料理写真と公式note特集料理の閲覧に最適化したシンプル・軽量構成としました。',
       '【v1.0.10 アップデート】公式note「定番ランチメニュー（https://note.com/firm_emu2667/n/n6fd871f52b1f）」より、「鶏かつ定食（150g）」「鶏かつW定食（300g）」「レバカツ定食」「お刺身定食」「海鮮バラちらし」の全5品を定番ランチ・名物定食カテゴリへ追加し、実物写真（お刺身定食の2アングル対応含む）と調理解説・記事リンクを統合しました。',
       '【v1.0.9 アップデート】駐車場のご案内セクションの駐車場案内図を店舗提供の公式案内図（店舗すぐそば6台 ＋ 斜め向かい「tictac hair」様ビル裏の契約駐車場4台〔4・5・8・9番〕、全10台詳細図）へ差し替え、拡大表示に対応しました。',
@@ -912,10 +1275,10 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
       '【v1.0.1 アップデート】Farcaster Mini Apps SDK初期化処理（sdk.actions.ready）、単一グローバルテーマ（AppTheme）統制、OOPデータモデル（PhotoItemModel / GalleryService）の導入。'
     ],
     specs: [
-      { label: '現在バージョン', value: 'v1.0.11' },
-      { label: '掲載料理点数', value: '実写特選4品 ＋ 公式note定番ランチ5品 ＋ 肉料理21品 ＋ 麺料理11品（計41品）' },
+      { label: '現在バージョン', value: 'v1.0.12' },
+      { label: '掲載料理点数', value: '実写特選4品 ＋ 定番ランチ5品 ＋ お刺身・山海の幸24品 ＋ 肉料理21品 ＋ 麺料理11品（計65品）' },
       { label: 'AIアシスタント', value: '完全削除（シンプル軽量化）' },
-      { label: '公式note記事連携', value: 'こだわり・定番ランチ・低温火入の肉料理・麺料理（全4記事連携）' },
+      { label: '公式note記事連携', value: 'こだわり・定番ランチ・お刺身・低温火入の肉料理・麺料理（全5記事連携）' },
       { label: 'こだわり5大方針', value: '海の音色・一期一会・自家製調味料・至高の火入れ・おもてなし' },
       { label: 'メインビジュアル', value: '割烹食堂かいね 実際のお料理写真4選' },
       { label: '写真掲載方針', value: '仮画像を完全排除し、実物写真のみで構成' },

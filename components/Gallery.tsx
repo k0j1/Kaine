@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { GalleryService, PhotoItemModel } from '../services/galleryService';
 import { PlacePhotoCategory } from '../types';
-import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL } from '../constants';
+import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL, NOTE_SASHIMI_ARTICLE_URL } from '../constants';
 import { PhotoModal } from './PhotoModal';
 import { ResilientImage } from './ResilientImage';
 import { AppTheme } from '../theme';
@@ -153,6 +153,13 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
         url: NOTE_LUNCH_ARTICLE_URL
       };
     }
+    if (selectedCategory === PlacePhotoCategory.SEAFOOD) {
+      return {
+        title: '公式note特集「【割烹食堂かいね】お刺身」より（海の幸・山の幸 掲載）',
+        description: 'お刺身盛り合わせ、本鮪カマトロ、活伊佐木焼霜造り、藁焼き鰹、低温火入サーモン、活鮑、ミルク牡蠣、生桜海老・白海老、会津産馬刺しなどを網羅。',
+        url: NOTE_SASHIMI_ARTICLE_URL
+      };
+    }
     if (selectedCategory === PlacePhotoCategory.MEAT_LOWTEMP) {
       return {
         title: '公式note特集「【割烹食堂かいね】低温火入の肉料理」より（全21品）',
@@ -180,7 +187,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
           <div className={headerClass.ornament}></div>
           <p className="font-serif text-[#4b5563] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             割烹食堂かいねの実際のお料理および公式note掲載の特集料理をご紹介いたします。<br />
-            王道の「定番ランチ（5品）」、精密な温度管理の「低温火入の肉料理（21品）」、出汁が主役の「麺料理（11品）」をお楽しみください。
+            「定番ランチ（5品）」「お刺身・海山の幸（24品）」「低温火入の肉料理（21品）」「麺料理（11品）」をお楽しみください。
           </p>
         </div>
 
@@ -323,6 +330,12 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
                     className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
                   >
                     定番ランチメニュー（5品）
+                  </button>
+                  <button
+                    onClick={() => handleSelectCategory(PlacePhotoCategory.SEAFOOD)}
+                    className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
+                  >
+                    お刺身・海山の幸（24品）
                   </button>
                   <button
                     onClick={() => handleSelectCategory(PlacePhotoCategory.MEAT_LOWTEMP)}
