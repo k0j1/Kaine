@@ -79,14 +79,6 @@ export class PhotoItemModel {
     return [...this._data.tags];
   }
 
-  public get has3D(): boolean {
-    return Boolean(this._data.has3D);
-  }
-
-  public get video3DUrl(): string | undefined {
-    return this._data.video3DUrl;
-  }
-
   /**
    * 検索クエリに合致するかどうか判定するビジネスメソッド
    */
@@ -180,11 +172,11 @@ export class GalleryService {
       this.photos.forEach(p => present.add(p.category));
       const ordered = [
         PlacePhotoCategory.ALL,
+        PlacePhotoCategory.SIGNATURE,
         PlacePhotoCategory.MEAT_LOWTEMP,
         PlacePhotoCategory.NOODLES,
         PlacePhotoCategory.SEAFOOD,
         PlacePhotoCategory.SEASONAL,
-        PlacePhotoCategory.SIGNATURE,
         PlacePhotoCategory.ALACARTE,
         PlacePhotoCategory.SAKE,
         PlacePhotoCategory.INTERIOR
@@ -243,7 +235,7 @@ export class GalleryService {
       case PlacePhotoCategory.ALL:
         return 'すべて';
       case PlacePhotoCategory.SIGNATURE:
-        return '名物定食';
+        return '定番ランチ・名物定食';
       case PlacePhotoCategory.SEAFOOD:
         return '旬の海鮮・刺身';
       case PlacePhotoCategory.SEASONAL:

@@ -1,40 +1,38 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   LayoutGrid,
-  Rotate3d,
   Sparkles,
   Maximize2,
   Search,
   X,
   BookOpen,
   ExternalLink,
-  ChevronDown
+  ChevronDown,
+  Layers
 } from 'lucide-react';
 import { GalleryService, PhotoItemModel } from '../services/galleryService';
 import { PlacePhotoCategory } from '../types';
-import { NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL } from '../constants';
+import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL } from '../constants';
 import { PhotoModal } from './PhotoModal';
-import { Dish3DViewer } from './Dish3DViewer';
-import { Dish3DModal } from './Dish3DModal';
 import { ResilientImage } from './ResilientImage';
 import { AppTheme } from '../theme';
 
 interface GalleryProps {
   apiImages?: string[];
-  initialViewMode?: 'grid' | '3dviewer' | 'carousel3d';
+  initialViewMode?: 'grid' | 'carousel3d';
 }
 
 const INITIAL_ALL_LIMIT = 10;
 
 /**
  * 料理と空間ギャラリーコンポーネント
- * 添付された割烹食堂かいねの実際のお料理写真および公式note（低温火入の肉料理・麺料理）の料理群を展示し、
- * 「一覧グリッド」「3D 360°ビューアー（動画連動全方位回転）」「和モダン3Dカルーセル」の表示形式で閲覧可能にします。
- * （※Googleマップからの写真掲載の記載は全て削除）
+ * 添付された割烹食堂かいねの実際のお料理写真および公式note（定番ランチ・低温火入の肉料理・麺料理）の料理群を展示し、
+ * 「一覧グリッド」「和モダンカルーセル」の表示形式で閲覧可能にします。
+ * （※Googleマップからの写真掲載の記載および3D 360°動画ビューアー機能は全て削除）
  */
 const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }) => {
-  // 表示形式（グリッド、3D 360°ビューアー、または 3Dカルーセル）
-  const [viewMode, setViewMode] = useState<'grid' | '3dviewer' | 'carousel3d'>(initialViewMode);
+  // 表示形式（グリッドまたはカルーセル）
+  const [viewMode, setViewMode] = useState<'grid' | 'carousel3d'>(initialViewMode);
   // カテゴリ・サブカテゴリ・検索フィルターステート
   const [selectedCategory, setSelectedCategory] = useState<PlacePhotoCategory>(PlacePhotoCategory.ALL);
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
@@ -43,8 +41,6 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
 
   // 拡大表示用モーダルステート
   const [activePhoto, setActivePhoto] = useState<PhotoItemModel | null>(null);
-  // 3D 360°料理確認モーダル用ステート
-  const [active3DDishId, setActive3DDishId] = useState<string | null>(null);
 
   // 3Dカルーセル用の回転ステート
   const [rotation, setRotation] = useState(0);
@@ -150,6 +146,13 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
 
   // アクティブカテゴリに応じた公式note記事案内情報
   const activeArticleMeta = useMemo(() => {
+    if (selectedCategory === PlacePhotoCategory.SIGNATURE) {
+      return {
+        title: '公式note特集「【割烹食堂かいね】定番ランチメニュー」より（全5品）',
+        description: '低温火入の「鶏かつ（150g）」「鶏かつW（300g）」、とろける「レバカツ定食」、旬鮮魚「お刺身定食」、特製寿司酢「海鮮バラちらし」を掲載。',
+        url: NOTE_LUNCH_ARTICLE_URL
+      };
+    }
     if (selectedCategory === PlacePhotoCategory.MEAT_LOWTEMP) {
       return {
         title: '公式note特集「【割烹食堂かいね】低温火入の肉料理」より（全21品）',
@@ -177,7 +180,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
           <div className={headerClass.ornament}></div>
           <p className="font-serif text-[#4b5563] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             割烹食堂かいねの実際のお料理および公式note掲載の特集料理をご紹介いたします。<br />
-            市場直送の鮮魚、精密な温度管理による「低温火入の肉料理（21品）」、出汁が主役の「麺料理（11品）」をお楽しみください。
+            王道の「定番ランチ（5品）」、精密な温度管理の「低温火入の肉料理（21品）」、出汁が主役の「麺料理（11品）」をお楽しみください。
           </p>
         </div>
 
@@ -205,35 +208,22 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
               <span>一覧</span>
             </button>
             <button
-              onClick={() => setViewMode('3dviewer')}
-              className={`px-3 py-1.5 ${AppTheme.rounded.sm} text-xs font-serif flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors ${
-                viewMode === '3dviewer'
-                  ? 'bg-white text-[#c5a059] shadow-xs font-bold'
-                  : 'text-[#6b7280] hover:text-[#1a1a1a]'
-              }`}
-              title="3D 360°全方位料理ビューアー"
-            >
-              <Rotate3d size={14} className={viewMode === '3dviewer' ? 'text-[#c5a059]' : ''} />
-              <span>3D 360°ビューアー</span>
-            </button>
-            <button
               onClick={() => setViewMode('carousel3d')}
               className={`px-3 py-1.5 ${AppTheme.rounded.sm} text-xs font-serif flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors ${
                 viewMode === 'carousel3d'
                   ? 'bg-white text-[#2c3e50] shadow-xs font-bold'
                   : 'text-[#6b7280] hover:text-[#1a1a1a]'
               }`}
-              title="3D回転カルーセル表示"
+              title="回転カルーセル表示"
             >
-              <Rotate3d size={14} />
+              <Layers size={14} />
               <span>カルーセル</span>
             </button>
           </div>
         </div>
 
-        {/* カテゴリフィルター・検索バー（グリッド・カルーセル表示時） */}
-        {viewMode !== '3dviewer' && (
-          <div className="mb-8 space-y-4">
+        {/* カテゴリフィルター・検索バー */}
+        <div className="mb-8 space-y-4">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               {/* カテゴリタブ */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1">
@@ -325,9 +315,15 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
               <div className={`bg-[#fafaf7] border border-[#e7e5e4] ${AppTheme.rounded.sm} px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-serif`}>
                 <div className="flex items-center gap-2 text-[#4b5563]">
                   <BookOpen size={14} className="text-[#c5a059] shrink-0" />
-                  <span>公式note料理図鑑から全32品を追加しました：</span>
+                  <span>公式note料理特集アーカイブ：</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-4">
+                  <button
+                    onClick={() => handleSelectCategory(PlacePhotoCategory.SIGNATURE)}
+                    className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
+                  >
+                    定番ランチメニュー（5品）
+                  </button>
                   <button
                     onClick={() => handleSelectCategory(PlacePhotoCategory.MEAT_LOWTEMP)}
                     className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
@@ -344,7 +340,6 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
               </div>
             )}
           </div>
-        )}
 
         {/* 1. 一覧グリッド表示 */}
         {viewMode === 'grid' && (
@@ -428,19 +423,6 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
                           {photo.authorName}
                         </span>
                         <div className="flex items-center gap-2 shrink-0">
-                          {photo.has3D && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setActive3DDishId(photo.id);
-                              }}
-                              className={`inline-flex items-center gap-1 px-2 py-1 bg-[#c5a059]/15 hover:bg-[#c5a059] text-[#9e7e3e] hover:text-white border border-[#c5a059]/40 ${AppTheme.rounded.sm} font-semibold transition-all`}
-                              title="3D 360°回転で細部を確認"
-                            >
-                              <Rotate3d size={12} />
-                              <span>3D確認</span>
-                            </button>
-                          )}
                           <span className="group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 text-[#2c3e50] font-semibold">
                             詳細 →
                           </span>
@@ -467,14 +449,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
           </>
         )}
 
-        {/* 2. 3D 360°インタラクティブビューアー表示 */}
-        {viewMode === '3dviewer' && (
-          <div className="mb-14">
-            <Dish3DViewer initialDishId={active3DDishId || undefined} />
-          </div>
-        )}
-
-        {/* 3. 和モダン3Dカルーセル表示 */}
+        {/* 2. 和モダンカルーセル表示 */}
         {viewMode === 'carousel3d' && (
           <div className="my-10">
             <div
@@ -592,17 +567,9 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
         allPhotos={filteredPhotos}
         onClose={() => setActivePhoto(null)}
         onSelectPhoto={(p) => setActivePhoto(p)}
-        onOpen3D={(dishId) => setActive3DDishId(dishId)}
       />
 
-      {/* 3D 360°料理確認モーダル */}
-      <Dish3DModal
-        isOpen={Boolean(active3DDishId && viewMode !== '3dviewer')}
-        dishId={active3DDishId || undefined}
-        onClose={() => setActive3DDishId(null)}
-      />
-
-      {/* 3Dカルーセル用CSS */}
+      {/* カルーセル用CSS */}
       <style>{`
         .perspective-1000 {
           perspective: 1000px;

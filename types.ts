@@ -77,8 +77,6 @@ export interface PlacePhoto {
   rating?: number;
   featured?: boolean;
   tags: string[];
-  has3D?: boolean;
-  video3DUrl?: string;
 }
 
 /**
@@ -104,24 +102,5 @@ export interface CommitmentPillar {
   details: string[];
   image: string;
   tag: string;
-}
-
-/**
- * 3D 360°回転料理モデルデータ
- */
-export interface Dish3DItem {
-  id: string;
-  dishId: string;
-  title: string;
-  subtitle: string;
-  videoUrl: string;
-  thumbnailUrl: string;
-  description: string;
-  duration: number; // 10.027秒
-  tags: string[];
-  specs: {
-    label: string;
-    value: string;
-  }[];
 }
 

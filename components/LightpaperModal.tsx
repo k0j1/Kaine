@@ -10,7 +10,7 @@ interface LightpaperModalProps {
 
 /**
  * 割烹食堂かいね ライトペーパー（設計仕様書・技術規格・アップデート履歴）モーダル
- * 仕様変更履歴（v1.0.5での3D 360°料理ビューアー新設、公式note記事連携）や料理技術規格を明文化して開示します。
+ * 仕様変更履歴（公式note記事連携、実物お料理写真ギャラリー）や料理技術規格を明文化して開示します。
  */
 export const LightpaperModal: React.FC<LightpaperModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;

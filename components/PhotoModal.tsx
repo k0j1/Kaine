@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, ChevronLeft, ChevronRight, Sparkles, Rotate3d, ExternalLink, Images } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Sparkles, ExternalLink, Images } from 'lucide-react';
 import { PhotoItemModel, GalleryService } from '../services/galleryService';
 import { ResilientImage } from './ResilientImage';
 import { AppTheme } from '../theme';
@@ -9,20 +9,18 @@ interface PhotoModalProps {
   allPhotos: PhotoItemModel[];
   onClose: () => void;
   onSelectPhoto: (photo: PhotoItemModel) => void;
-  onOpen3D?: (dishId: string) => void;
 }
 
 /**
  * 料理写真拡大・詳細モーダルコンポーネント
  * オブジェクト指向で設計されたPhotoItemModelを受け取り、割烹食堂かいねの実際のお料理詳細や公式note解説を表示します。
- * （※Googleマップからの写真掲載の記載は全て削除、3D回転確認および複数アングル切替に対応）
+ * （※Googleマップからの写真掲載の記載および3D確認機能は全て削除、複数アングル切替に対応）
  */
 export const PhotoModal: React.FC<PhotoModalProps> = ({
   photo,
   allPhotos,
   onClose,
-  onSelectPhoto,
-  onOpen3D
+  onSelectPhoto
 }) => {
   const [showAltImage, setShowAltImage] = useState(false);
 
@@ -134,7 +132,7 @@ export const PhotoModal: React.FC<PhotoModalProps> = ({
                 className={`absolute bottom-3 right-3 bg-black/75 hover:bg-[#c5a059] text-white text-xs px-2.5 py-1 ${AppTheme.rounded.sm} flex items-center gap-1.5 border border-white/20 font-serif transition-colors`}
               >
                 <Images size={12} />
-                <span>{showAltImage ? '仕上げ写真を見る' : '仕込み写真を見る'}</span>
+                <span>{showAltImage ? 'メイン写真を見る' : '別アングルを見る'}</span>
               </button>
             )}
           </div>
@@ -177,19 +175,6 @@ export const PhotoModal: React.FC<PhotoModalProps> = ({
             {/* アクションボタン */}
             <div className="pt-4 border-t border-[#e7e5e4] flex flex-col gap-3">
               <div className="flex flex-col sm:flex-row gap-3">
-                {photo.has3D && onOpen3D && (
-                  <button
-                    onClick={() => {
-                      onClose();
-                      onOpen3D(photo.id);
-                    }}
-                    className={`flex-1 ${AppTheme.getButtonClass('gold')} text-sm font-bold py-2.5 px-4 gap-2`}
-                  >
-                    <Rotate3d size={16} />
-                    <span>3D 360°で確認</span>
-                  </button>
-                )}
-
                 {photo.sourceArticleUrl && (
                   <a
                     href={photo.sourceArticleUrl}

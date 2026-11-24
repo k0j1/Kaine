@@ -9,14 +9,10 @@ import AccessSection from './components/AccessSection';
 import InfoSection from './components/InfoSection';
 import MediaSection from './components/MediaSection';
 import { LightpaperModal } from './components/LightpaperModal';
-import { Dish3DModal } from './components/Dish3DModal';
 
 const App: React.FC = () => {
   // ライトペーパー（仕様書）モーダル表示ステート
   const [isLightpaperOpen, setIsLightpaperOpen] = useState(false);
-  // 3D 360°料理確認モーダル表示ステート
-  const [is3DModalOpen, setIs3DModalOpen] = useState(false);
-  const [selected3DDishId, setSelected3DDishId] = useState<string | undefined>(undefined);
 
   // Farcaster Mini Apps SDK 初期化処理（チェックリスト準拠）
   useEffect(() => {
@@ -39,42 +35,28 @@ const App: React.FC = () => {
     }
   };
 
-  const handleOpen3D = (dishId?: string) => {
-    setSelected3DDishId(dishId);
-    setIs3DModalOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-[#f5f5f0] font-sans text-[#1a1a1a]">
       {/* ナビゲーションバー */}
       <Navbar 
         scrollToSection={scrollToSection} 
         onOpenLightpaper={() => setIsLightpaperOpen(true)}
-        onOpen3D={() => handleOpen3D()}
       />
       
       <main>
         {/* 各コンポーネントは内部で定義されたデフォルト画像または定数画像を使用します */}
         <Hero 
           onExploreGallery={() => scrollToSection('gallery')} 
-          onOpen3D={() => handleOpen3D()}
         />
         <Concept />
         <MenuSection />
-        {/* 割烹食堂かいね 実際のお料理写真ギャラリー＆3Dビューアー */}
+        {/* 割烹食堂かいね 実際のお料理写真ギャラリー */}
         <Gallery />
         <MediaSection />
         <AccessSection />
         <InfoSection />
       </main>
       
-      {/* 3D 360°料理確認モーダル */}
-      <Dish3DModal 
-        isOpen={is3DModalOpen}
-        dishId={selected3DDishId}
-        onClose={() => setIs3DModalOpen(false)}
-      />
-
       {/* 店舗思想・調理技術仕様書（ライトペーパー）モーダル */}
       <LightpaperModal 
         isOpen={isLightpaperOpen} 

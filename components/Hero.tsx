@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { SITE_SUBTITLE, APP_VERSION, PLACE_PHOTOS } from '../constants';
-import { ChevronDown, Sparkles, Rotate3d } from 'lucide-react';
+import { ChevronDown, Sparkles, Utensils } from 'lucide-react';
 import { AppTheme } from '../theme';
 
 interface HeroProps {
   heroImage?: string;
   onExploreGallery?: () => void;
-  onOpen3D?: () => void;
 }
 
 /**
  * ヒーローセクションコンポーネント
  * 添付された割烹食堂かいねの実際のお料理写真をメインビジュアルとして採用し、
- * タイトル画面のバージョン3桁目（v1.0.5）を明記します。
- * （※Googleマップからの写真掲載の記載は全て削除、3D 360°ビューアー導線完備）
+ * タイトル画面のバージョン3桁目を明記します。
+ * （※Googleマップからの写真掲載の記載および3Dビューアーは削除）
  */
-const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery, onOpen3D }) => {
+const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery }) => {
   // 添付された4枚の実際のお料理写真
   const heroPhotos = PLACE_PHOTOS.slice(0, 4);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -32,10 +31,6 @@ const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery, onOpen3D }) =>
   const bgImage = heroImage || activePhoto.imageUrl;
 
   const handleScrollToGallery = () => {
-    if (onOpen3D) {
-      onOpen3D();
-      return;
-    }
     if (onExploreGallery) {
       onExploreGallery();
       return;
@@ -65,10 +60,6 @@ const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery, onOpen3D }) =>
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs font-mono text-[#e6c887]">
             <Sparkles size={13} className="text-[#c5a059]" />
             <span>割烹食堂かいね 公式サイト v{APP_VERSION}</span>
-          </span>
-          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#c5a059]/20 backdrop-blur-md border border-[#c5a059]/40 rounded-full text-xs font-serif text-[#e6c887]">
-            <Rotate3d size={13} className="text-[#c5a059]" />
-            <span>3D 360°料理ビューアー搭載</span>
           </span>
         </div>
 
@@ -100,8 +91,8 @@ const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery, onOpen3D }) =>
             onClick={handleScrollToGallery}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c5a059] hover:bg-[#9e7e3e] text-white px-8 py-3.5 rounded-sm text-sm font-serif font-medium tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl group"
           >
-            <Rotate3d size={17} className="group-hover:rotate-45 transition-transform" />
-            <span>3D 360°で料理を見る</span>
+            <Utensils size={16} />
+            <span>お料理ギャラリーを見る</span>
           </button>
           <a
             href="#concept"

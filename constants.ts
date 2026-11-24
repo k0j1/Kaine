@@ -1,7 +1,7 @@
 
 import { MenuCategory, MenuSectionData, MediaLink, PlacePhoto, PlacePhotoCategory, LightpaperSection, CommitmentPillar } from './types';
 
-export const APP_VERSION = "1.0.9";
+export const APP_VERSION = "1.0.11";
 export const SITE_NAME = "割烹食堂かいね";
 export const SITE_SUBTITLE = "Kappo Shokudo Kaine";
 
@@ -11,6 +11,8 @@ export const PHONE_NUMBER = "024-954-4579";
 export const RESERVATION_URL = "https://www.instagram.com/kaine_cuisine/";
 // 公式note記事リンク（割烹食堂かいねのこだわり）
 export const NOTE_ARTICLE_URL = "https://note.com/firm_emu2667/n/nf27eed0b29ce";
+// 公式note記事リンク（定番ランチメニュー・全5品）
+export const NOTE_LUNCH_ARTICLE_URL = "https://note.com/firm_emu2667/n/n6fd871f52b1f";
 // 公式note記事リンク（低温火入の肉料理・全21品）
 export const NOTE_MEAT_ARTICLE_URL = "https://note.com/firm_emu2667/n/n2f10b059166f";
 // 公式note記事リンク（麺料理・全11品）
@@ -186,6 +188,14 @@ export const MEDIA_LINKS: MediaLink[] = [
     tags: ['店主のこだわり', '公式note記事', '自家製調味料', '料理哲学']
   },
   {
+    id: 'note-lunch',
+    siteName: '公式 note「定番ランチメニュー」',
+    description: '昼の看板「鶏かつ（150g）」「鶏かつW（300g）」をはじめ、「レバカツ定食」「お刺身定食」「海鮮バラちらし」まで、割烹食堂かいねが誇る王道の昼定食ラインナップをご紹介。',
+    url: NOTE_LUNCH_ARTICLE_URL,
+    image: 'https://assets.st-note.com/img/1795486825-f0PhDM9HyYv8K3VLlGk5S4s2.png',
+    tags: ['定番ランチ', '鶏かつ定食', 'お刺身定食', '海鮮バラちらし']
+  },
+  {
     id: 'note-meat',
     siteName: '公式 note「低温火入の肉料理」',
     description: '看板の「鶏かつ」をはじめ、福島牛・仙台牛ステーキ、低温調理レバニラ、豚かしら、ロースト3種盛り合わせまで、温度と時間にこだわり抜いた全21品の肉料理アーカイブ。',
@@ -252,9 +262,7 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     authorName: '割烹食堂かいね 実際のお料理',
     rating: 5,
     featured: true,
-    tags: ['本鮪炙り', '市場直送鮮魚', '胡麻と青葱', '特選海鮮'],
-    has3D: true,
-    video3DUrl: 'assets/aistudio/gemini_generated_video_b2e289ab_9df8df7a.mp4'
+    tags: ['本鮪炙り', '市場直送鮮魚', '胡麻と青葱', '特選海鮮']
   },
   {
     id: 'k2',
@@ -282,9 +290,7 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     authorName: '割烹食堂かいね 実際のお料理',
     rating: 5,
     featured: true,
-    tags: ['黄金一番出汁', '桜生麩', '出汁大根', '割烹椀物'],
-    has3D: true,
-    video3DUrl: 'assets/aistudio/gemini_generated_video_ab9a9cdb_a47598c0.mp4'
+    tags: ['黄金一番出汁', '桜生麩', '出汁大根', '割烹椀物']
   },
   {
     id: 'k4',
@@ -773,6 +779,85 @@ export const PLACE_PHOTOS: PlacePhoto[] = [
     sourceArticleUrl: NOTE_NOODLE_ARTICLE_URL,
     sourceArticleTitle: '【割烹食堂かいね】麺料理',
     tags: ['米＋タピオカ麺', '昆布鰹吸い地', '特製塩ダレ']
+  },
+  // =========================================================================
+  // 公式note「【割烹食堂かいね】定番ランチメニュー」全5品
+  // https://note.com/firm_emu2667/n/n6fd871f52b1f
+  // =========================================================================
+  {
+    id: 'note-lunch-1',
+    title: '鶏かつ定食（150g）',
+    category: PlacePhotoCategory.SIGNATURE,
+    subCategory: '定番ランチメニュー',
+    imageUrl: 'https://assets.st-note.com/img/1795486825-f0PhDM9HyYv8K3VLlGk5S4s2.png',
+    description: 'じっくりと低温で火入れし続ける事でしっとり柔らかく、皮で覆うように巻くことでよりジューシーに仕上げています。出汁に1晩漬け込んで火入れをする事で独特の臭みや雑味を抑えこみ旨味を増しています。干し椎茸や昆布をふんだんに使って仕込む特製出汁ソースと、季節の果実等を使った自家製の塩を添えて。',
+    price: '¥980',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 定番ランチメニュー',
+    sourceArticleUrl: NOTE_LUNCH_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】定番ランチメニュー',
+    featured: true,
+    tags: ['低温火入', '国産鶏もも', '干し椎茸・昆布', '出汁ソース', '果実塩']
+  },
+  {
+    id: 'note-lunch-2',
+    title: '鶏かつW定食（300g）',
+    category: PlacePhotoCategory.SIGNATURE,
+    subCategory: '定番ランチメニュー',
+    imageUrl: 'https://assets.st-note.com/img/1795487504-Bfiv8cKHFZ6h057EmDsukteO.png',
+    description: '国産鶏もも肉をたっぷり300g使用した満足感あふれるダブル定食。出汁に1晩漬け込み低温火入れすることで極厚ながら驚くほどしっとりジューシー。干し椎茸と昆布の特製出汁ソース・自家製果実塩でお愉しみください。',
+    price: '¥1,380',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 定番ランチメニュー',
+    sourceArticleUrl: NOTE_LUNCH_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】定番ランチメニュー',
+    tags: ['低温火入', '鶏かつ300g', '国産鶏もも', '出汁ソース', '果実塩']
+  },
+  {
+    id: 'note-lunch-3',
+    title: 'レバカツ定食',
+    category: PlacePhotoCategory.SIGNATURE,
+    subCategory: '定番ランチメニュー',
+    imageUrl: 'https://assets.st-note.com/img/1795487293-57Urc8vnPLXpxD62qCNGZs9o.png',
+    description: '丁寧な下処理と低温火入れによって臭みを一切感じさせず、まるでフォアグラのようなとろとろの食感を引き出した割烹食堂かいね定番のレバカツ定食。特製ダシソースと炊きたてご飯（おかわり無料）との相性も格別です。',
+    price: '¥880',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 定番ランチメニュー',
+    sourceArticleUrl: NOTE_LUNCH_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】定番ランチメニュー',
+    featured: true,
+    tags: ['定番ランチ', '低温火入', 'とろとろ食感', '特製出汁ソース']
+  },
+  {
+    id: 'note-lunch-4',
+    title: 'お刺身定食',
+    category: PlacePhotoCategory.SIGNATURE,
+    subCategory: '定番ランチメニュー',
+    imageUrl: 'https://assets.st-note.com/img/1795484470-3NinJGkm6yzw4lF1Ebf7eps5.png',
+    altImageUrl: 'https://assets.st-note.com/img/1795487102-NZzU9BH25fLgVXYhclCTjR1E.png',
+    description: 'こだわりの新鮮な旬の魚介を盛り込んだ当店自慢のお刺身定食です。（銚子産 めばち鮪トロ・北海道産 水たこ 生たこ刺し・宮崎県産 勘八 華造り・青森県産 平目 薄造り）',
+    price: '¥1,800',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 定番ランチメニュー',
+    sourceArticleUrl: NOTE_LUNCH_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】定番ランチメニュー',
+    featured: true,
+    tags: ['めばち鮪トロ', '北海道産水たこ', '宮崎産勘八', '青森産平目']
+  },
+  {
+    id: 'note-lunch-5',
+    title: '海鮮バラちらし',
+    category: PlacePhotoCategory.SIGNATURE,
+    subCategory: '定番ランチメニュー',
+    imageUrl: 'https://assets.st-note.com/img/1775795697-HtaLpJ5U1blxN906nkT3c7gW.png',
+    description: 'かいね特製のざらめで仕込む寿司酢を加え、甘みと酸味、塩味のバランスがヅケにした海鮮とも相性◎',
+    price: '¥1,580',
+    googleMapsUrl: GOOGLE_MAPS_LOCATION_URL,
+    authorName: '公式note 定番ランチメニュー',
+    sourceArticleUrl: NOTE_LUNCH_ARTICLE_URL,
+    sourceArticleTitle: '【割烹食堂かいね】定番ランチメニュー',
+    featured: true,
+    tags: ['海鮮バラちらし寿司', 'ざらめ', '特製寿司酢', 'ヅケ海鮮']
   }
 ];
 
@@ -815,22 +900,22 @@ export const LIGHTPAPER_DATA: LightpaperSection[] = [
     title: 'デジタル体験仕様・アップデート履歴',
     subtitle: 'WebサイトおよびFarcaster Mini App連携の技術仕様',
     content: [
+      '【v1.0.11 アップデート】3D 360°で料理を見る機能および関連する料理動画を削除し、高精細な実物お料理写真と公式note特集料理の閲覧に最適化したシンプル・軽量構成としました。',
+      '【v1.0.10 アップデート】公式note「定番ランチメニュー（https://note.com/firm_emu2667/n/n6fd871f52b1f）」より、「鶏かつ定食（150g）」「鶏かつW定食（300g）」「レバカツ定食」「お刺身定食」「海鮮バラちらし」の全5品を定番ランチ・名物定食カテゴリへ追加し、実物写真（お刺身定食の2アングル対応含む）と調理解説・記事リンクを統合しました。',
       '【v1.0.9 アップデート】駐車場のご案内セクションの駐車場案内図を店舗提供の公式案内図（店舗すぐそば6台 ＋ 斜め向かい「tictac hair」様ビル裏の契約駐車場4台〔4・5・8・9番〕、全10台詳細図）へ差し替え、拡大表示に対応しました。',
       '【v1.0.8 アップデート】仮表示の「メニュー写真」セクションおよびInstagramサンプル写真フィードセクションを削除し、実物のお料理写真と公式note特集料理のみで構成されたクリーンな構成に整理しました。',
       '【v1.0.7 アップデート】割烹食堂かいね公式noteの2大レシピ特集記事「低温火入の肉料理（全21品）」および「麺料理（全11品）」から全32品のお料理データ（写真・調理解説・カテゴリ・サブカテゴリ・素材タグ・note記事リンク）を完全取り込み。ギャラリーにカテゴリ別フィルター（鶏/牛/豚/盛り合わせ、素麺/ラーメン/うどん/蕎麦/冷麺/米麺）とキーワード検索、画像読み込みフォールバックを実装しました。',
       '【v1.0.6 アップデート】AIコンシェルジュ機能を完全に削除。',
-      '【v1.0.5 アップデート】ご提供いただいた360度ターンテーブル撮影動画から料理を全方位から立体的に確認できる「3D 360°インタラクティブ料理ビューアー」機能を新設。「本鮪の贅沢炙り丼」「桜生麩と丸大根の割烹椀」の2品において、左右ドラッグ・スワイプによる360度シームレス回転、視点プリセット（正面0°・右面90°・背面180°・左面270°）、ズーム拡大検査が可能になりました。',
       '【v1.0.4 アップデート】公式note記事「割烹食堂かいねのこだわり（https://note.com/firm_emu2667/n/nf27eed0b29ce）」への公式リンクを追加。noteで語られている「店名（海の音色）に込めた想い」「毎日変わる一期一会のお品書き」「調味料まで手作りのこだわり」「最高の一杯を届ける姿勢」「割烹と食堂のおもてなし」の5大柱をこだわりセクション（Concept）およびメディアセクションに完全統合。',
       '【v1.0.3 アップデート】Googleマップからの写真掲載に関する文言および機能を完全削除。店舗・ユーザーより提供された「本鮪の贅沢炙り丼」「旬魚のタタキ 香味ガーリック仕立て」「桜生麩と丸大根の椀物」「天然鮮魚と生アオサ海苔和え」の実際のお料理写真をページのメイン画像（Hero）および料理ギャラリーに全面適用。',
       '【v1.0.2 アップデート】空席状況・WEB予約機能（Airリザーブ）を完全削除。',
       '【v1.0.1 アップデート】Farcaster Mini Apps SDK初期化処理（sdk.actions.ready）、単一グローバルテーマ（AppTheme）統制、OOPデータモデル（PhotoItemModel / GalleryService）の導入。'
     ],
     specs: [
-      { label: '現在バージョン', value: 'v1.0.9' },
-      { label: '掲載料理点数', value: '実写特選4品 ＋ 公式note肉料理21品 ＋ 麺料理11品（計36品）' },
+      { label: '現在バージョン', value: 'v1.0.11' },
+      { label: '掲載料理点数', value: '実写特選4品 ＋ 公式note定番ランチ5品 ＋ 肉料理21品 ＋ 麺料理11品（計41品）' },
       { label: 'AIアシスタント', value: '完全削除（シンプル軽量化）' },
-      { label: '3D料理ビューアー', value: '360° ターンテーブル動画連動（全方位ドラッグ回転・ズーム）' },
-      { label: '公式note記事連携', value: 'こだわり・低温火入の肉料理・麺料理（全3記事連携）' },
+      { label: '公式note記事連携', value: 'こだわり・定番ランチ・低温火入の肉料理・麺料理（全4記事連携）' },
       { label: 'こだわり5大方針', value: '海の音色・一期一会・自家製調味料・至高の火入れ・おもてなし' },
       { label: 'メインビジュアル', value: '割烹食堂かいね 実際のお料理写真4選' },
       { label: '写真掲載方針', value: '仮画像を完全排除し、実物写真のみで構成' },

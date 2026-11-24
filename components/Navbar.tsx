@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { Menu, X, Instagram, BookOpen, MapPin, Rotate3d } from 'lucide-react';
+import { Menu, X, Instagram, BookOpen, MapPin } from 'lucide-react';
 import { SITE_NAME, RESERVATION_URL, APP_VERSION, GOOGLE_MAPS_LOCATION_URL } from '../constants';
 import { AppTheme } from '../theme';
 
 interface NavbarProps {
   scrollToSection: (id: string) => void;
   onOpenLightpaper?: () => void;
-  onOpen3D?: () => void;
 }
 
 /**
  * ナビゲーションバーコンポーネント
- * バージョン表記(v1.0.5)、ライトペーパー（仕様書）表示機能、3D料理ビューアー、店舗地図リンクを提供します。
- * （※空席状況・WEB予約機能は削除）
+ * バージョン表記、ライトペーパー（仕様書）表示機能、店舗地図リンクを提供します。
+ * （※空席状況・WEB予約機能および3Dビューアーは削除）
  */
-const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper, onOpen3D }) => {
+const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleNavClick = (id: string) => {
@@ -58,18 +57,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper, onOp
                 </button>
               );
             })}
-
-            {/* 3D料理ビューアー ボタン */}
-            {onOpen3D && (
-              <button
-                onClick={onOpen3D}
-                className="inline-flex items-center gap-1.5 text-xs font-serif text-[#9e7e3e] bg-[#c5a059]/15 hover:bg-[#c5a059] hover:text-white border border-[#c5a059]/40 px-3 py-1.5 rounded-sm transition-all"
-                title="360度インタラクティブ3D料理ビューアーを開く"
-              >
-                <Rotate3d size={14} className="text-[#c5a059]" />
-                <span>3D料理ビュー</span>
-              </button>
-            )}
 
             {/* 仕様書（ライトペーパー）ボタン */}
             {onOpenLightpaper && (
@@ -155,19 +142,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper, onOp
                   {item === 'Concept' ? 'こだわり（note記事）' : item === 'Gallery' ? 'お料理ギャラリー' : item === 'Menu' ? 'お品書き' : item === 'Media' ? '掲載情報・note' : item}
                 </button>
               ))}
-
-              {onOpen3D && (
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    onOpen3D();
-                  }}
-                  className="w-full py-2.5 text-center text-sm font-serif text-[#9e7e3e] bg-[#c5a059]/10 hover:bg-[#c5a059]/20 flex items-center justify-center gap-2 border border-[#c5a059]/30 rounded-sm mt-2"
-                >
-                  <Rotate3d size={16} className="text-[#c5a059]" />
-                  <span>3D 360°料理ビューアーを開く</span>
-                </button>
-              )}
 
               {onOpenLightpaper && (
                 <button
