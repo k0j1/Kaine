@@ -225,4 +225,55 @@ export class AppTheme {
       detailHint: 'inline-flex items-center gap-1 text-[#2c3e50] font-semibold shrink-0'
     };
   }
+
+  /**
+   * ギャラリー表示形式切替（アイコン専用ボタン）用のスタイルクラスを返すOOPヘルパー
+   */
+  public static getViewToggleClasses(): {
+    container: string;
+    button: (isActive: boolean) => string;
+  } {
+    return {
+      container: `inline-flex items-center gap-1 bg-[#f0f0eb] p-1 ${this.rounded.sm} border border-[#e7e5e4] self-start sm:self-auto shrink-0`,
+      button: (isActive: boolean) =>
+        `w-10 h-10 inline-flex items-center justify-center ${this.rounded.sm} transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] ${
+          isActive
+            ? `bg-white text-[#2c3e50] ${this.shadows.sm} border border-[#e7e5e4]`
+            : 'text-[#6b7280] hover:text-[#1a1a1a] hover:bg-white/60 border border-transparent'
+        }`
+    };
+  }
+
+  /**
+   * 上部ナビゲーションバー（PC1行表示保証・改行防止）用のスタイルクラスを返すOOPヘルパー
+   */
+  public static getNavbarClasses(): {
+    nav: string;
+    row: string;
+    brandWrapper: string;
+    brandTitle: string;
+    versionBadge: string;
+    desktopMenu: string;
+    desktopLinksGroup: string;
+    desktopLink: string;
+    desktopActionsGroup: string;
+    lightpaperButton: string;
+    mapButton: string;
+    instagramButton: string;
+  } {
+    return {
+      nav: 'fixed top-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-[#e7e5e4] transition-all duration-300',
+      row: 'flex items-center justify-between h-20 gap-2 xl:gap-6',
+      brandWrapper: 'flex items-center gap-1.5 xl:gap-3 cursor-pointer shrink-0 whitespace-nowrap',
+      brandTitle: 'text-base xl:text-2xl font-serif font-bold text-[#1a1a1a] tracking-normal xl:tracking-wider whitespace-nowrap shrink-0',
+      versionBadge: `text-[10px] font-mono px-1.5 xl:px-2 py-0.5 bg-[#c5a059]/15 text-[#9e7e3e] border border-[#c5a059]/30 ${this.rounded.sm} font-semibold tracking-normal whitespace-nowrap shrink-0`,
+      desktopMenu: 'hidden lg:flex items-center gap-2.5 xl:gap-5 shrink-0',
+      desktopLinksGroup: 'flex items-center gap-1 xl:gap-4 shrink-0',
+      desktopLink: 'text-[#2c3e50] hover:text-[#c5a059] px-1.5 xl:px-2 py-1 text-xs xl:text-sm font-serif font-medium transition-colors tracking-normal xl:tracking-wider whitespace-nowrap shrink-0',
+      desktopActionsGroup: 'flex items-center gap-1.5 xl:gap-2.5 shrink-0',
+      lightpaperButton: `inline-flex items-center gap-1 xl:gap-1.5 text-[11px] xl:text-xs font-serif text-[#4b5563] hover:text-[#1a1a1a] border border-[#d6d3d1] hover:border-[#9ca3af] px-2 xl:px-3 py-1.5 ${this.rounded.sm} transition-colors whitespace-nowrap shrink-0`,
+      mapButton: `inline-flex items-center gap-1 xl:gap-1.5 bg-[#4285F4] hover:bg-[#3367d6] text-white px-2 xl:px-3.5 py-1.5 ${this.rounded.sm} text-[11px] xl:text-xs font-serif transition-colors ${this.shadows.sm} whitespace-nowrap shrink-0`,
+      instagramButton: `inline-flex items-center gap-1 xl:gap-1.5 border border-[#2c3e50] text-[#2c3e50] hover:bg-[#2c3e50] hover:text-white px-2 xl:px-3.5 py-1.5 ${this.rounded.sm} text-[11px] xl:text-xs font-serif transition-colors whitespace-nowrap shrink-0`
+    };
+  }
 }

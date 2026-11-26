@@ -49,6 +49,9 @@ export enum PlacePhotoCategory {
   ALL = 'ALL',
   SIGNATURE = 'SIGNATURE',   // 名物定食（鶏かつ・レバかつ等）
   SEAFOOD = 'SEAFOOD',       // 鮮魚・お造り・海鮮丼
+  GRILLED_FISH = 'GRILLED_FISH', // 旬の焼き魚（公式note連載）
+  TEMPURA_FRY = 'TEMPURA_FRY',   // 天ぷら・フライ・揚げ物（公式note連載）
+  TOMATO = 'TOMATO',         // とまと料理（公式note連載）
   SEASONAL = 'SEASONAL',     // 季節の土鍋ご飯・旬の一皿・椀物
   MEAT_LOWTEMP = 'MEAT_LOWTEMP', // 低温火入の肉料理（公式note連載）
   NOODLES = 'NOODLES',       // 特製 麺料理（公式note連載）

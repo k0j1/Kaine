@@ -176,6 +176,9 @@ export class GalleryService {
         PlacePhotoCategory.MEAT_LOWTEMP,
         PlacePhotoCategory.NOODLES,
         PlacePhotoCategory.SEAFOOD,
+        PlacePhotoCategory.GRILLED_FISH,
+        PlacePhotoCategory.TEMPURA_FRY,
+        PlacePhotoCategory.TOMATO,
         PlacePhotoCategory.SEASONAL,
         PlacePhotoCategory.ALACARTE,
         PlacePhotoCategory.SAKE,
@@ -238,6 +241,12 @@ export class GalleryService {
         return '定番ランチ・名物定食';
       case PlacePhotoCategory.SEAFOOD:
         return '旬の海鮮・刺身';
+      case PlacePhotoCategory.GRILLED_FISH:
+        return '旬の焼き魚';
+      case PlacePhotoCategory.TEMPURA_FRY:
+        return '天ぷら・フライ';
+      case PlacePhotoCategory.TOMATO:
+        return 'とまと料理';
       case PlacePhotoCategory.SEASONAL:
         return '季節の土鍋・椀物';
       case PlacePhotoCategory.MEAT_LOWTEMP:

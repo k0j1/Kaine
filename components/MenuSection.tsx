@@ -79,10 +79,10 @@ const MenuSection: React.FC = () => {
         <div className="mt-10 bg-[#fafaf7] border border-[#e7e5e4] rounded-sm p-6 text-center">
           <p className="text-xs font-serif text-[#c5a059] tracking-widest uppercase mb-1">Special Archives from Official note</p>
           <h3 className="font-serif font-bold text-base md:text-lg text-[#1a1a1a] mb-2">
-            定番ランチ（5品）・お刺身（24品）・低温火入の肉料理（21品）・麺料理（11品）
+            定番ランチ（5品）・お刺身（24品）・焼き魚（4品）・天ぷら・フライ（38品）・とまと料理（4品）・低温火入の肉料理（21品）・麺料理（11品）
           </h3>
           <p className="text-xs font-serif text-[#4b5563] leading-relaxed mb-4 max-w-xl mx-auto">
-            定番ランチメニューの実物写真や、旬のお刺身・海山の幸、低温調理の肉料理、特製麺料理など公式note特集の全61品を写真・解説付きで下のギャラリーに掲載しております。
+            定番ランチメニューの実物写真や、旬のお刺身・海山の幸、香ばしい焼き魚、揚げたての天ぷら・フライ、特製とまと料理、低温調理の肉料理、特製麺料理など公式note特集の全107品を写真・解説付きで下のギャラリーに掲載しております。
           </p>
           <a
             href="#gallery"

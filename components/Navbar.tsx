@@ -8,98 +8,118 @@ interface NavbarProps {
   onOpenLightpaper?: () => void;
 }
 
+interface NavItemConfig {
+  id: string;
+  desktopLabel: string;
+  mobileLabel: string;
+}
+
+const NAV_ITEMS: NavItemConfig[] = [
+  { id: 'concept', desktopLabel: 'こだわり', mobileLabel: 'こだわり（note記事）' },
+  { id: 'menu', desktopLabel: 'お品書き', mobileLabel: 'お品書き' },
+  { id: 'gallery', desktopLabel: '料理ギャラリー', mobileLabel: 'お料理ギャラリー' },
+  { id: 'media', desktopLabel: '掲載・note', mobileLabel: '掲載情報・note' },
+  { id: 'access', desktopLabel: 'アクセス', mobileLabel: 'アクセス' },
+  { id: 'info', desktopLabel: '店舗情報', mobileLabel: '店舗情報' }
+];
+
 /**
  * ナビゲーションバーコンポーネント
  * バージョン表記、ライトペーパー（仕様書）表示機能、店舗地図リンクを提供します。
+ * PC表示時はすべてのメニュー項目・アクションボタンを1行で折り返しなく表示します。
  * （※空席状況・WEB予約機能および3Dビューアーは削除）
  */
 const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navClasses = AppTheme.getNavbarClasses();
 
   const handleNavClick = (id: string) => {
-    scrollToSection(id);
-    setIsOpen(false);
+    try {
+      scrollToSection(id);
+      setIsOpen(false);
+    } catch (err) {
+      console.error('セクションスクロール中にエラーが発生しました:', err);
+    }
   };
 
   return (
-    <nav className="fixed top-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 transition-all duration-300">
+    <nav className={navClasses.nav}>
       <div className={AppTheme.spacing.containerMax}>
-        <div className="flex items-center justify-between h-20">
+        <div className={navClasses.row}>
           {/* ブランドロゴ ＆ バージョンバッジ */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleNavClick('hero')}>
-            <h1 className="text-xl md:text-2xl font-serif font-bold text-[#1a1a1a] tracking-wider">
+          <div className={navClasses.brandWrapper} onClick={() => handleNavClick('hero')}>
+            <h1 className={navClasses.brandTitle}>
               {SITE_NAME}
             </h1>
-            <span 
-              className="text-[10px] font-mono px-2 py-0.5 bg-[#c5a059]/15 text-[#9e7e3e] border border-[#c5a059]/30 rounded-sm font-semibold tracking-normal"
+            <span
+              className={navClasses.versionBadge}
               title={`割烹食堂かいね バージョン ${APP_VERSION}`}
             >
               v{APP_VERSION}
             </span>
           </div>
           
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-5 xl:space-x-7">
-            {['Concept', 'Menu', 'Gallery', 'Media', 'Access', 'Info'].map((item) => {
-              const label = 
-                item === 'Concept' ? 'こだわり' :
-                item === 'Menu' ? 'お品書き' :
-                item === 'Gallery' ? '料理ギャラリー' :
-                item === 'Media' ? '掲載・note' :
-                item === 'Access' ? 'アクセス' : '店舗情報';
-              return (
+          {/* Desktop Menu（PC閲覧時は全項目を確実に1行表示） */}
+          <div className={navClasses.desktopMenu}>
+            <div className={navClasses.desktopLinksGroup}>
+              {NAV_ITEMS.map((item) => (
                 <button
-                  key={item}
-                  onClick={() => handleNavClick(item.toLowerCase())}
-                  className="text-[#2c3e50] hover:text-[#c5a059] px-2 py-1 text-sm font-serif font-medium transition-colors tracking-wider"
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleNavClick(item.id)}
+                  className={navClasses.desktopLink}
                 >
-                  {label}
+                  {item.desktopLabel}
                 </button>
-              );
-            })}
+              ))}
+            </div>
 
-            {/* 仕様書（ライトペーパー）ボタン */}
-            {onOpenLightpaper && (
-              <button
-                onClick={onOpenLightpaper}
-                className="inline-flex items-center gap-1.5 text-xs font-serif text-[#4b5563] hover:text-[#1a1a1a] border border-stone-300 hover:border-stone-400 px-3 py-1.5 rounded-sm transition-colors"
-                title="店舗理念・調理技術規格・アップデート履歴"
+            <div className={navClasses.desktopActionsGroup}>
+              {/* 仕様書（ライトペーパー）ボタン */}
+              {onOpenLightpaper && (
+                <button
+                  type="button"
+                  onClick={onOpenLightpaper}
+                  className={navClasses.lightpaperButton}
+                  title="店舗理念・調理技術規格・アップデート履歴"
+                >
+                  <BookOpen size={14} className="text-[#c5a059] shrink-0" />
+                  <span>仕様書</span>
+                </button>
+              )}
+
+              {/* Google Maps ボタン */}
+              <a
+                href={GOOGLE_MAPS_LOCATION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={navClasses.mapButton}
+                title="店舗地図・アクセスを確認"
               >
-                <BookOpen size={14} className="text-[#c5a059]" />
-                <span>仕様書</span>
-              </button>
-            )}
+                <MapPin size={14} className="shrink-0" />
+                <span>店舗地図</span>
+              </a>
 
-            {/* Google Maps ボタン */}
-            <a
-              href={GOOGLE_MAPS_LOCATION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-[#4285F4] hover:bg-[#3367d6] text-white px-3.5 py-1.5 rounded-sm text-xs font-serif transition-colors shadow-sm"
-              title="店舗地図・アクセスを確認"
-            >
-              <MapPin size={14} />
-              <span>店舗地図</span>
-            </a>
-
-            {/* 公式 Instagram ボタン */}
-            <a 
-               href={RESERVATION_URL}
-               target="_blank"
-               rel="noopener noreferrer"
-               className="border border-[#2c3e50] text-[#2c3e50] hover:bg-[#2c3e50] hover:text-white px-3.5 py-1.5 rounded-sm text-xs font-serif transition-colors flex items-center gap-1.5"
-            >
-              <Instagram size={14} />
-              <span>公式Instagram</span>
-            </a>
+              {/* 公式 Instagram ボタン */}
+              <a
+                href={RESERVATION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={navClasses.instagramButton}
+              >
+                <Instagram size={14} className="shrink-0" />
+                <span>公式Instagram</span>
+              </a>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-2 shrink-0">
             {onOpenLightpaper && (
               <button
+                type="button"
                 onClick={onOpenLightpaper}
-                className="p-1.5 text-stone-600 border border-stone-300 rounded text-xs font-serif flex items-center gap-1"
+                className="p-1.5 text-stone-600 border border-stone-300 rounded text-xs font-serif flex items-center gap-1 whitespace-nowrap"
                 aria-label="仕様書"
               >
                 <BookOpen size={14} className="text-[#c5a059]" />
@@ -107,6 +127,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper }) =>
               </button>
             )}
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
               className="text-[#2c3e50] hover:text-[#1a1a1a] p-2"
               aria-label="メニューを開く"
@@ -123,9 +144,9 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper }) =>
           <div className="px-4 pt-3 pb-6 space-y-2 flex flex-col items-center">
              <div className="w-full flex items-center justify-between pb-2 border-b border-stone-100 text-xs font-serif text-stone-500">
                <span>バージョン: <b className="text-[#c5a059]">v{APP_VERSION}</b></span>
-               <a 
-                 href={GOOGLE_MAPS_LOCATION_URL} 
-                 target="_blank" 
+               <a
+                 href={GOOGLE_MAPS_LOCATION_URL}
+                 target="_blank"
                  rel="noopener noreferrer"
                  className="text-[#4285F4] flex items-center gap-1"
                >
@@ -133,18 +154,20 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper }) =>
                </a>
              </div>
 
-             {['Concept', 'Menu', 'Gallery', 'Media', 'Access', 'Info'].map((item) => (
+             {NAV_ITEMS.map((item) => (
                 <button
-                  key={item}
-                  onClick={() => handleNavClick(item.toLowerCase())}
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleNavClick(item.id)}
                   className="text-[#2c3e50] hover:text-[#c5a059] block py-2.5 rounded-sm text-base font-medium w-full text-center font-serif border-b border-stone-50"
                 >
-                  {item === 'Concept' ? 'こだわり（note記事）' : item === 'Gallery' ? 'お料理ギャラリー' : item === 'Menu' ? 'お品書き' : item === 'Media' ? '掲載情報・note' : item}
+                  {item.mobileLabel}
                 </button>
               ))}
 
               {onOpenLightpaper && (
                 <button
+                  type="button"
                   onClick={() => {
                     setIsOpen(false);
                     onOpenLightpaper();
@@ -156,7 +179,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection, onOpenLightpaper }) =>
                 </button>
               )}
 
-              <a 
+              <a
                 href={GOOGLE_MAPS_LOCATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"

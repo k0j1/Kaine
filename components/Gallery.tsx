@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { GalleryService, PhotoItemModel } from '../services/galleryService';
 import { PlacePhotoCategory } from '../types';
-import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL, NOTE_SASHIMI_ARTICLE_URL, GOOGLE_MAPS_LOCATION_URL } from '../constants';
+import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL, NOTE_SASHIMI_ARTICLE_URL, NOTE_GRILLED_FISH_ARTICLE_URL, NOTE_TEMPURA_ARTICLE_URL, NOTE_TOMATO_ARTICLE_URL, GOOGLE_MAPS_LOCATION_URL } from '../constants';
 import { PhotoModal } from './PhotoModal';
 import { GalleryCarousel } from './GalleryCarousel';
 import { ResilientImage } from './ResilientImage';
@@ -107,6 +107,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
 
   const headerClass = AppTheme.getSectionHeaderClass();
   const cardClasses = AppTheme.getDishCardClasses();
+  const viewToggleClasses = AppTheme.getViewToggleClasses();
 
   // 定番看板料理の解説リスト
   const signatureDishes = [
@@ -143,6 +144,27 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
         url: NOTE_SASHIMI_ARTICLE_URL
       };
     }
+    if (selectedCategory === PlacePhotoCategory.GRILLED_FISH) {
+      return {
+        title: '公式note特集「【割烹食堂かいね】焼き魚」より（全4品）',
+        description: '紀州産「鮎の塩焼き」、高知県産真鯵を使った「鯵の塩焼き」、特製塩糀ダシ漬け「生鰊塩糀漬け焼き」、青森県産「ムラソイ姿焼き」を掲載。',
+        url: NOTE_GRILLED_FISH_ARTICLE_URL
+      };
+    }
+    if (selectedCategory === PlacePhotoCategory.TEMPURA_FRY) {
+      return {
+        title: '公式note特集「【割烹食堂かいね】天ぷら／フライ」より（全38品）',
+        description: '瀬戸内・広島産牡蠣フライ＆特製半熟タルタル、白子、真鯛鱗揚げ、穴子・目光天丼、鰈唐揚げ、天然鮎＆岩魚唐揚げ、四季の野菜・山菜・きのこ天ぷら、甘味天ぷらまで網羅。',
+        url: NOTE_TEMPURA_ARTICLE_URL
+      };
+    }
+    if (selectedCategory === PlacePhotoCategory.TOMATO) {
+      return {
+        title: '公式note特集「【割烹食堂かいね】とまと料理」より（全4品）',
+        description: '昆布と梅干しの旨味が凝縮された「とまとのおひたし」、外はサクサク中はとろーり「トマトチーズ挟み揚げ」、冷製「梅そうめん～トマト出汁～」、特製「トマトぽん酢」を掲載。',
+        url: NOTE_TOMATO_ARTICLE_URL
+      };
+    }
     if (selectedCategory === PlacePhotoCategory.MEAT_LOWTEMP) {
       return {
         title: '公式note特集「【割烹食堂かいね】低温火入の肉料理」より（全21品）',
@@ -170,7 +192,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
           <div className={headerClass.ornament}></div>
           <p className="font-serif text-[#4b5563] text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             割烹食堂かいねの実際のお料理および公式note掲載の特集料理をご紹介いたします。<br />
-            「定番ランチ（5品）」「お刺身・海山の幸（24品）」「低温火入の肉料理（21品）」「麺料理（11品）」をお楽しみください。
+            「定番ランチ（5品）」「お刺身・海山の幸（24品）」「焼き魚（4品）」「天ぷら・フライ（38品）」「とまと料理（4品）」「低温火入の肉料理（21品）」「麺料理（11品）」をお楽しみください。
           </p>
         </div>
 
@@ -183,31 +205,27 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
             </span>
           </div>
 
-          {/* 表示モード切り替えボタン */}
-          <div className={`flex items-center bg-[#f0f0eb] p-0.5 ${AppTheme.rounded.sm} border border-[#e7e5e4] self-start sm:self-auto`}>
+          {/* 表示モード切り替えボタン（アイコンのみ表示） */}
+          <div className={viewToggleClasses.container} role="group" aria-label="表示形式の切り替え">
             <button
+              type="button"
               onClick={() => setViewMode('grid')}
-              className={`px-3 py-1.5 ${AppTheme.rounded.sm} text-xs font-serif flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors ${
-                viewMode === 'grid'
-                  ? 'bg-white text-[#2c3e50] shadow-xs font-bold'
-                  : 'text-[#6b7280] hover:text-[#1a1a1a]'
-              }`}
+              className={viewToggleClasses.button(viewMode === 'grid')}
               title="一覧グリッド表示"
+              aria-label="一覧グリッド表示"
+              aria-pressed={viewMode === 'grid'}
             >
-              <LayoutGrid size={14} />
-              <span>一覧</span>
+              <LayoutGrid size={18} />
             </button>
             <button
+              type="button"
               onClick={() => setViewMode('carousel3d')}
-              className={`px-3 py-1.5 ${AppTheme.rounded.sm} text-xs font-serif flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors ${
-                viewMode === 'carousel3d'
-                  ? 'bg-white text-[#2c3e50] shadow-xs font-bold'
-                  : 'text-[#6b7280] hover:text-[#1a1a1a]'
-              }`}
+              className={viewToggleClasses.button(viewMode === 'carousel3d')}
               title="カルーセル表示"
+              aria-label="カルーセル表示"
+              aria-pressed={viewMode === 'carousel3d'}
             >
-              <Layers size={14} />
-              <span>カルーセル</span>
+              <Layers size={18} />
             </button>
           </div>
         </div>
@@ -319,6 +337,24 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
                     className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
                   >
                     お刺身・海山の幸（24品）
+                  </button>
+                  <button
+                    onClick={() => handleSelectCategory(PlacePhotoCategory.GRILLED_FISH)}
+                    className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
+                  >
+                    旬の焼き魚（4品）
+                  </button>
+                  <button
+                    onClick={() => handleSelectCategory(PlacePhotoCategory.TEMPURA_FRY)}
+                    className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
+                  >
+                    天ぷら・フライ（38品）
+                  </button>
+                  <button
+                    onClick={() => handleSelectCategory(PlacePhotoCategory.TOMATO)}
+                    className="text-[#2c3e50] hover:text-[#c5a059] font-bold underline underline-offset-4 transition-colors"
+                  >
+                    とまと料理（4品）
                   </button>
                   <button
                     onClick={() => handleSelectCategory(PlacePhotoCategory.MEAT_LOWTEMP)}
