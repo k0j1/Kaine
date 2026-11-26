@@ -3,6 +3,7 @@ import { SITE_SUBTITLE, APP_VERSION, PLACE_PHOTOS } from '../constants';
 import { ChevronDown, Sparkles, Utensils, Shuffle } from 'lucide-react';
 import { AppTheme } from '../theme';
 import { HeroSlideshowService } from '../services/heroSlideshowService';
+import { ImageAltService } from '../services/imageAltService';
 import { PlacePhoto } from '../types';
 
 interface HeroProps {
@@ -123,7 +124,8 @@ const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery }) => {
         <img
           key={bgImage}
           src={bgImage}
-          alt={activePhoto ? activePhoto.title : '割烹食堂かいねのお料理'}
+          alt={ImageAltService.buildDishAlt(activePhoto, 'hero')}
+          decoding="async"
           referrerPolicy="no-referrer"
           onError={handleBackgroundError}
           className={heroClasses.bgImage}
@@ -208,7 +210,8 @@ const Hero: React.FC<HeroProps> = ({ heroImage, onExploreGallery }) => {
                 >
                   <img
                     src={thumbSrc}
-                    alt={photo.title}
+                    alt={ImageAltService.buildDishAlt(photo, 'thumbnail')}
+                    decoding="async"
                     referrerPolicy="no-referrer"
                     onError={() => {
                       setFailedImageIds((prev) => {

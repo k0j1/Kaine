@@ -12,6 +12,8 @@ import {
   Droplet 
 } from 'lucide-react';
 import { CommitmentService, CommitmentModel } from '../services/commitmentService';
+import { ImageAltService } from '../services/imageAltService';
+import { ResilientImage } from './ResilientImage';
 import { AppTheme } from '../theme';
 
 interface ConceptProps {
@@ -138,9 +140,10 @@ const Concept: React.FC<ConceptProps> = ({ onExploreGallery }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12">
             {/* 左側：料理写真・タグ */}
             <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-auto min-h-[300px] lg:min-h-[460px] overflow-hidden bg-stone-100">
-              <img
+              <ResilientImage
                 src={selectedPillar.image}
-                alt={selectedPillar.title}
+                alt={ImageAltService.buildCommitmentAlt(selectedPillar)}
+                fallbackLabel={selectedPillar.title}
                 className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>

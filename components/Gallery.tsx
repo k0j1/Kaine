@@ -16,6 +16,7 @@ import { NOTE_LUNCH_ARTICLE_URL, NOTE_MEAT_ARTICLE_URL, NOTE_NOODLE_ARTICLE_URL,
 import { PhotoModal } from './PhotoModal';
 import { GalleryCarousel } from './GalleryCarousel';
 import { ResilientImage } from './ResilientImage';
+import { ImageAltService } from '../services/imageAltService';
 import { AppTheme } from '../theme';
 
 interface GalleryProps {
@@ -404,7 +405,7 @@ const Gallery: React.FC<GalleryProps> = ({ apiImages, initialViewMode = 'grid' }
                     <div className={cardClasses.imageWrapper}>
                       <ResilientImage
                         src={photo.imageUrl}
-                        alt={photo.title}
+                        alt={ImageAltService.buildDishAlt(photo, 'gallery')}
                         fallbackLabel={photo.title}
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />

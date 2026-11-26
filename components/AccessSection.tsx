@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Car, Maximize2, X } from 'lucide-react';
 import { ADDRESS, PARKING_IMAGE_URL, GOOGLE_MAPS_LOCATION_URL } from '../constants';
 import { ResilientImage } from './ResilientImage';
+import { ImageAltService } from '../services/imageAltService';
 import { AppTheme } from '../theme';
 
 /**
@@ -42,6 +43,7 @@ const AccessSection: React.FC = () => {
             </div>
             <div className={`w-full h-[400px] bg-[#f0f0eb] ${AppTheme.rounded.sm} overflow-hidden border border-[#e7e5e4] ${AppTheme.shadows.sm} relative group`}>
               <iframe
+                title="割烹食堂かいね（福島県郡山市菜根）の所在地Googleマップ"
                 src={`https://maps.google.com/maps?q=${encodeURIComponent(ADDRESS)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                 width="100%"
                 height="100%"
@@ -87,17 +89,26 @@ const AccessSection: React.FC = () => {
 
               <div
                 onClick={() => setIsParkingModalOpen(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsParkingModalOpen(true);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="駐車場案内図を拡大表示する"
                 className={`group relative bg-white p-2 ${AppTheme.rounded.sm} ${AppTheme.shadows.sm} border border-[#e7e5e4] max-w-sm mx-auto cursor-pointer overflow-hidden`}
                 title="クリックで駐車場案内図を拡大表示"
               >
                 <ResilientImage
                   src={PARKING_IMAGE_URL}
-                  alt="割烹食堂かいね 駐車場のご案内"
+                  alt={ImageAltService.buildParkingMapAlt(false)}
                   fallbackLabel="駐車場案内図"
                   className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                 />
                 <div className={`mt-2 flex items-center justify-center gap-1.5 text-xs font-serif text-[#2c3e50] group-hover:text-[#c5a059] transition-colors`}>
-                  <Maximize2 size={13} />
+                  <Maximize2 size={13} aria-hidden="true" />
                   <span>クリックで案内図を拡大表示</span>
                 </div>
               </div>
@@ -130,7 +141,7 @@ const AccessSection: React.FC = () => {
             <div className="max-h-[82vh] overflow-auto flex justify-center bg-[#f5f5f0]">
               <ResilientImage
                 src={PARKING_IMAGE_URL}
-                alt="割烹食堂かいね 駐車場のご案内（拡大）"
+                alt={ImageAltService.buildParkingMapAlt(true)}
                 fallbackLabel="駐車場案内図"
                 loading="eager"
                 className="w-full h-auto object-contain"

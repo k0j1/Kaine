@@ -2,6 +2,7 @@ import React from 'react';
 import { ExternalLink, ArrowRight, Smartphone, MapPin, Star, Info, BookOpen } from 'lucide-react';
 import { MEDIA_LINKS } from '../constants';
 import { ResilientImage } from './ResilientImage';
+import { ImageAltService } from '../services/imageAltService';
 import { AppTheme } from '../theme';
 
 /**
@@ -52,7 +53,7 @@ const MediaSection: React.FC = () => {
                 <div className="h-48 overflow-hidden relative bg-[#f0f0eb]">
                   <ResilientImage
                     src={link.image}
-                    alt={link.siteName}
+                    alt={ImageAltService.buildMediaLinkAlt(link)}
                     fallbackLabel={link.siteName}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

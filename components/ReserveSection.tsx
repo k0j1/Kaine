@@ -26,7 +26,7 @@ const ReserveSection: React.FC = () => {
                     この予約システムは
                     <a style={{color:'#555', textDecoration:'underline'}} href="https://airregi.jp/reserve/?vos=otrsvxototzzx00000099" target="_blank" rel="noopener noreferrer">
                         Airリザーブ
-                        <img src="https://cdn.airrsv.net/img/icon/open_link_black.svg" style={{margin:'2px 2px 4px', verticalAlign:'top'}} alt="open link"/>
+                        <img src="https://cdn.airrsv.net/img/icon/open_link_black.svg" style={{margin:'2px 2px 4px', verticalAlign:'top'}} alt="" aria-hidden="true"/>
                     </a>
                     が提供しています
                 </div>

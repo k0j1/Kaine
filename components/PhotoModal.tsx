@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Sparkles, ExternalLink, Images } from 'lucide-react';
 import { PhotoItemModel, GalleryService } from '../services/galleryService';
 import { ResilientImage } from './ResilientImage';
+import { ImageAltService } from '../services/imageAltService';
 import { AppTheme } from '../theme';
 
 interface PhotoModalProps {
@@ -113,7 +114,10 @@ export const PhotoModal: React.FC<PhotoModalProps> = ({
           <div className="relative bg-stone-900 flex items-center justify-center min-h-[300px] md:min-h-[460px] overflow-hidden">
             <ResilientImage
               src={displayImageUrl}
-              alt={photo.title}
+              alt={ImageAltService.buildDishAlt(
+                photo,
+                showAltImage && photo.altImageUrl ? 'modal-alt' : 'modal'
+              )}
               fallbackLabel={photo.title}
               loading="eager"
               className="w-full h-full object-cover max-h-[520px]"

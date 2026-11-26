@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { ChevronLeft, ChevronRight, Pause, Play, Sparkles } from 'lucide-react';
 import { PhotoItemModel, GalleryService, CarouselNavigator } from '../services/galleryService';
 import { ResilientImage } from './ResilientImage';
+import { ImageAltService } from '../services/imageAltService';
 import { AppTheme } from '../theme';
 
 interface GalleryCarouselProps {
@@ -233,7 +234,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                   <div className={cardClasses.imageWrapper}>
                     <ResilientImage
                       src={photo.imageUrl}
-                      alt={photo.title}
+                      alt={ImageAltService.buildDishAlt(photo, 'carousel')}
                       fallbackLabel={photo.title}
                       className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     />
@@ -348,7 +349,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 >
                   <ResilientImage
                     src={photo.thumbnailUrl}
-                    alt={photo.title}
+                    alt={ImageAltService.buildDishAlt(photo, 'thumbnail')}
                     fallbackLabel={photo.title}
                     className="w-full h-full object-cover"
                   />
