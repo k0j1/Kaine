@@ -1,7 +1,7 @@
 {
   "name": "kaine-website",
   "private": true,
-  "version": "1.0.17",
+  "version": "1.0.19",
   "type": "module",
   "homepage": "https://k0j1.github.io/Kaine",
   "scripts": {

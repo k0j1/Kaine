@@ -245,7 +245,163 @@ export class AppTheme {
   }
 
   /**
-   * 上部ナビゲーションバー（PC1行表示保証・改行防止）用のスタイルクラスを返すOOPヘルパー
+   * アプリ全体シェルのスタイルクラスを返すOOPヘルパー
+   * スマートフォン表示時は下部ナビゲーションバーと重ならないよう下余白を確保します。
+   */
+  public static getAppShellClasses(): {
+    root: string;
+  } {
+    return {
+      root: 'min-h-screen bg-[#f5f5f0] font-sans text-[#1a1a1a] pb-20 lg:pb-0'
+    };
+  }
+
+  /**
+   * ヒーローセクション（ランダム料理スライドショー対応）用のスタイルクラスを返すOOPヘルパー
+   */
+  public static getHeroClasses(): {
+    section: string;
+    bgWrapper: string;
+    bgImage: string;
+    bgScrim: string;
+    content: string;
+    versionWrap: string;
+    versionBadge: string;
+    versionIcon: string;
+    verticalCopyWrap: string;
+    verticalCopy: string;
+    title: string;
+    subtitle: string;
+    captionWrap: string;
+    captionTitle: string;
+    captionDivider: string;
+    captionCategory: string;
+    actionsWrap: string;
+    primaryCta: string;
+    secondaryCta: string;
+    controlsRow: string;
+    thumbnailStrip: string;
+    thumbnailButton: (isActive: boolean) => string;
+    thumbnailImage: string;
+    shuffleButton: string;
+    scrollIndicator: string;
+    scrollInner: string;
+    scrollLabel: string;
+  } {
+    return {
+      section: 'relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-24 lg:pt-24 lg:pb-12',
+      bgWrapper: 'absolute inset-0 z-0',
+      bgImage: 'w-full h-full object-cover opacity-85 transition-opacity duration-700 scale-105',
+      bgScrim: 'absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/85',
+      content: 'relative z-10 text-center text-white px-4 fade-in max-w-4xl mx-auto flex flex-col items-center',
+      versionWrap: 'mb-5 flex flex-wrap items-center justify-center gap-2',
+      versionBadge: `inline-flex items-center gap-1.5 px-3.5 py-1 bg-white/10 backdrop-blur-md border border-white/20 ${this.rounded.sm} text-xs font-mono text-[#e6c887]`,
+      versionIcon: 'text-[#c5a059] shrink-0',
+      verticalCopyWrap: 'mb-5',
+      verticalCopy: 'writing-vertical-rl text-base md:text-xl tracking-[0.5em] font-serif border-l border-white/40 pl-4 py-5 h-36 md:h-44 inline-block text-stone-200',
+      title: 'text-4xl md:text-6xl lg:text-7xl font-bold font-serif mb-3 tracking-[0.2em] text-white drop-shadow-md',
+      subtitle: 'text-xs md:text-lg font-light tracking-[0.3em] uppercase text-stone-300 mb-5',
+      captionWrap: `mb-7 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 bg-black/55 backdrop-blur-md px-4 py-2 ${this.rounded.sm} border border-white/15 text-xs md:text-sm font-serif max-w-full`,
+      captionTitle: 'text-[#e6c887] font-semibold',
+      captionDivider: 'text-white/40',
+      captionCategory: 'text-stone-300 text-[11px] md:text-xs',
+      actionsWrap: 'flex flex-col sm:flex-row items-center gap-3.5 mb-6 w-full sm:w-auto',
+      primaryCta: `w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c5a059] hover:bg-[#9e7e3e] text-white px-8 py-3.5 ${this.rounded.sm} text-sm font-serif font-medium tracking-wider transition-all duration-300 ${this.shadows.lg} hover:${this.shadows.xl} whitespace-nowrap`,
+      secondaryCta: `w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-3.5 ${this.rounded.sm} text-sm font-serif tracking-wider transition-all duration-300 backdrop-blur-sm whitespace-nowrap`,
+      controlsRow: 'flex flex-wrap items-center justify-center gap-2.5 mb-5',
+      thumbnailStrip: 'flex items-center gap-2',
+      thumbnailButton: (isActive: boolean) =>
+        `relative w-11 h-11 md:w-14 md:h-14 ${this.rounded.sm} overflow-hidden border-2 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] ${
+          isActive
+            ? 'border-[#c5a059] scale-110 shadow-lg ring-2 ring-[#c5a059]/40 opacity-100'
+            : 'border-white/40 opacity-65 hover:opacity-100'
+        }`,
+      thumbnailImage: 'w-full h-full object-cover',
+      shuffleButton: `inline-flex items-center justify-center gap-1.5 min-h-[44px] px-3 bg-black/50 hover:bg-black/75 border border-white/25 hover:border-[#c5a059] text-stone-200 hover:text-[#e6c887] ${this.rounded.sm} text-xs font-serif transition-all duration-200 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] whitespace-nowrap`,
+      scrollIndicator: 'cursor-pointer hidden sm:block',
+      scrollInner: 'animate-bounce flex flex-col items-center text-stone-400 hover:text-white transition-colors',
+      scrollLabel: 'text-[10px] font-serif tracking-widest uppercase mb-1'
+    };
+  }
+
+  /**
+   * スマートフォン向け画面下部ナビゲーションバー＆ボトムシート用のスタイルクラスを返すOOPヘルパー
+   * 親指操作領域（Thumb Zone）と44px以上のタップ領域、Safe Area余白に準拠します。
+   */
+  public static getMobileBottomNavClasses(): {
+    bar: string;
+    grid: string;
+    tabButton: (isActive: boolean) => string;
+    activeBar: string;
+    tabIcon: (isActive: boolean) => string;
+    tabLabel: (isActive: boolean) => string;
+    sheetBackdrop: string;
+    sheetContainer: string;
+    sheetHandleWrap: string;
+    sheetHandle: string;
+    sheetHeader: string;
+    sheetTitle: string;
+    sheetSubtitle: string;
+    sheetCloseBtn: string;
+    sheetBody: string;
+    sheetSectionList: string;
+    sheetSectionBtn: (isActive: boolean) => string;
+    sheetSectionTitle: (isActive: boolean) => string;
+    sheetSectionDesc: string;
+    sheetSectionArrow: (isActive: boolean) => string;
+    sheetActionsHeading: string;
+    sheetActionsGrid: string;
+    sheetSpecBtn: string;
+    sheetPhoneBtn: string;
+    sheetMapBtn: string;
+    sheetInstagramBtn: string;
+  } {
+    return {
+      bar: 'lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e7e5e4] shadow-[0_-4px_20px_rgba(0,0,0,0.06)] pb-[env(safe-area-inset-bottom)]',
+      grid: 'grid grid-cols-5 items-stretch h-16 max-w-lg mx-auto',
+      tabButton: (isActive: boolean) =>
+        `relative flex flex-col items-center justify-center min-h-[44px] px-1 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#c5a059] active:scale-95 ${
+          isActive ? 'text-[#2c3e50]' : 'text-[#6b7280] hover:text-[#1a1a1a]'
+        }`,
+      activeBar: 'absolute top-0 left-3 right-3 h-0.5 bg-[#c5a059]',
+      tabIcon: (isActive: boolean) =>
+        `transition-colors duration-200 ${isActive ? 'text-[#c5a059]' : 'text-[#6b7280]'}`,
+      tabLabel: (isActive: boolean) =>
+        `text-[10px] font-serif mt-1 leading-none whitespace-nowrap tracking-tight ${
+          isActive ? 'font-bold text-[#1a1a1a]' : 'font-medium text-[#6b7280]'
+        }`,
+      sheetBackdrop: 'lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end justify-center',
+      sheetContainer: `w-full max-w-lg bg-[#fafaf7] border-t border-[#e7e5e4] rounded-t-2xl ${this.shadows.xl} max-h-[82vh] flex flex-col overflow-hidden pb-[env(safe-area-inset-bottom)]`,
+      sheetHandleWrap: 'pt-3 pb-1 flex justify-center shrink-0',
+      sheetHandle: 'w-10 h-1 bg-[#d6d3d1] rounded-full',
+      sheetHeader: 'px-5 py-3 border-b border-[#e7e5e4] flex items-center justify-between shrink-0 bg-white',
+      sheetTitle: 'text-base font-serif font-bold text-[#1a1a1a] tracking-wider',
+      sheetSubtitle: 'text-[11px] font-mono text-[#9e7e3e] mt-0.5',
+      sheetCloseBtn: `min-w-[44px] min-h-[44px] inline-flex items-center justify-center text-[#6b7280] hover:text-[#1a1a1a] hover:bg-[#f0f0eb] ${this.rounded.sm} transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059]`,
+      sheetBody: 'overflow-y-auto px-5 py-4 space-y-5',
+      sheetSectionList: 'space-y-1.5',
+      sheetSectionBtn: (isActive: boolean) =>
+        `w-full min-h-[48px] px-3.5 py-2.5 ${this.rounded.sm} border text-left flex items-center justify-between gap-3 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c5a059] ${
+          isActive
+            ? `bg-white border-[#c5a059] ${this.shadows.sm}`
+            : 'bg-white/80 border-[#e7e5e4] hover:border-[#c5a059]/60'
+        }`,
+      sheetSectionTitle: (isActive: boolean) =>
+        `text-sm font-serif font-bold ${isActive ? 'text-[#2c3e50]' : 'text-[#1a1a1a]'}`,
+      sheetSectionDesc: 'text-[11px] font-serif text-[#6b7280] mt-0.5',
+      sheetSectionArrow: (isActive: boolean) =>
+        `shrink-0 ${isActive ? 'text-[#c5a059]' : 'text-[#9ca3af]'}`,
+      sheetActionsHeading: 'text-[11px] font-serif font-bold text-[#6b7280] tracking-wider mb-2',
+      sheetActionsGrid: 'grid grid-cols-2 gap-2.5',
+      sheetSpecBtn: `min-h-[44px] px-3 py-2.5 bg-white border border-[#d6d3d1] hover:border-[#c5a059] text-[#1a1a1a] ${this.rounded.sm} text-xs font-serif font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap`,
+      sheetPhoneBtn: `min-h-[44px] px-3 py-2.5 bg-[#c5a059] hover:bg-[#9e7e3e] text-white ${this.rounded.sm} text-xs font-serif font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap ${this.shadows.sm}`,
+      sheetMapBtn: `min-h-[44px] px-3 py-2.5 bg-[#4285F4] hover:bg-[#3367d6] text-white ${this.rounded.sm} text-xs font-serif font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap ${this.shadows.sm}`,
+      sheetInstagramBtn: `min-h-[44px] px-3 py-2.5 bg-[#2c3e50] hover:bg-[#1a1a1a] text-white ${this.rounded.sm} text-xs font-serif font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap ${this.shadows.sm}`
+    };
+  }
+
+  /**
+   * 上部ナビゲーションバー（PC1行表示保証・モバイル省スペース設計）用のスタイルクラスを返すOOPヘルパー
    */
   public static getNavbarClasses(): {
     nav: string;
@@ -260,10 +416,12 @@ export class AppTheme {
     lightpaperButton: string;
     mapButton: string;
     instagramButton: string;
+    mobileActionsGroup: string;
+    mobileLightpaperButton: string;
   } {
     return {
       nav: 'fixed top-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-[#e7e5e4] transition-all duration-300',
-      row: 'flex items-center justify-between h-20 gap-2 xl:gap-6',
+      row: 'flex items-center justify-between h-14 lg:h-20 gap-2 xl:gap-6',
       brandWrapper: 'flex items-center gap-1.5 xl:gap-3 cursor-pointer shrink-0 whitespace-nowrap',
       brandTitle: 'text-base xl:text-2xl font-serif font-bold text-[#1a1a1a] tracking-normal xl:tracking-wider whitespace-nowrap shrink-0',
       versionBadge: `text-[10px] font-mono px-1.5 xl:px-2 py-0.5 bg-[#c5a059]/15 text-[#9e7e3e] border border-[#c5a059]/30 ${this.rounded.sm} font-semibold tracking-normal whitespace-nowrap shrink-0`,
@@ -273,7 +431,9 @@ export class AppTheme {
       desktopActionsGroup: 'flex items-center gap-1.5 xl:gap-2.5 shrink-0',
       lightpaperButton: `inline-flex items-center gap-1 xl:gap-1.5 text-[11px] xl:text-xs font-serif text-[#4b5563] hover:text-[#1a1a1a] border border-[#d6d3d1] hover:border-[#9ca3af] px-2 xl:px-3 py-1.5 ${this.rounded.sm} transition-colors whitespace-nowrap shrink-0`,
       mapButton: `inline-flex items-center gap-1 xl:gap-1.5 bg-[#4285F4] hover:bg-[#3367d6] text-white px-2 xl:px-3.5 py-1.5 ${this.rounded.sm} text-[11px] xl:text-xs font-serif transition-colors ${this.shadows.sm} whitespace-nowrap shrink-0`,
-      instagramButton: `inline-flex items-center gap-1 xl:gap-1.5 border border-[#2c3e50] text-[#2c3e50] hover:bg-[#2c3e50] hover:text-white px-2 xl:px-3.5 py-1.5 ${this.rounded.sm} text-[11px] xl:text-xs font-serif transition-colors whitespace-nowrap shrink-0`
+      instagramButton: `inline-flex items-center gap-1 xl:gap-1.5 border border-[#2c3e50] text-[#2c3e50] hover:bg-[#2c3e50] hover:text-white px-2 xl:px-3.5 py-1.5 ${this.rounded.sm} text-[11px] xl:text-xs font-serif transition-colors whitespace-nowrap shrink-0`,
+      mobileActionsGroup: 'lg:hidden flex items-center gap-2 shrink-0',
+      mobileLightpaperButton: `min-h-[36px] px-2.5 py-1.5 text-[#4b5563] hover:text-[#1a1a1a] border border-[#d6d3d1] hover:border-[#c5a059] ${this.rounded.sm} text-[11px] font-serif inline-flex items-center gap-1 whitespace-nowrap transition-colors`
     };
   }
 }
